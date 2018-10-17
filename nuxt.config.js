@@ -1,4 +1,5 @@
-const pkg = require('./package')
+const pkg = require('./package');
+const axios = require('axios');
 
 module.exports = {
   mode: 'universal',
@@ -14,19 +15,18 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'canonical', href: '/' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
     ]
   },
 
-  /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#fff' },
 
   /*
   ** Global CSS
   */
   css: [
+    'assets/css/main.css'
   ],
 
   /*
@@ -40,7 +40,8 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa',
   ],
   /*
   ** Axios module configuration
@@ -49,6 +50,12 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
+  generate: {
+    routes: async function () {
+      const { data } = await axios.get('https://storage.googleapis.com/meredith-config/businesses.json');
+      return data.businesses.map(business => business.key);
+    }
+  },
   /*
   ** Build configuration
   */
