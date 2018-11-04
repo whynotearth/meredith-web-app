@@ -1,4 +1,4 @@
-import RehashTrash from './rehash-trash';
+const RehashTrash = require('./rehash-trash');
 
 const data = {
   business: {
@@ -6,5 +6,4 @@ const data = {
   },
 };
 
-export default data;
 module.exports = data;

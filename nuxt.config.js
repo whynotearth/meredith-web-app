@@ -57,7 +57,10 @@ module.exports = {
   },
 
   generate: {
-    routes: () => Object.keys(data.businesses),
+    routes: () => {
+      console.log(data);
+      return Object.keys(data.business);
+    },
   },
   /*
   ** Build configuration
