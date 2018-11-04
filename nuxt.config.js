@@ -1,7 +1,7 @@
 const pkg = require('./package');
 const axios = require('axios');
 
-const data = require('./cms');
+import data from './cms';
 
 module.exports = {
   mode: 'universal',
@@ -57,10 +57,18 @@ module.exports = {
   },
 
   generate: {
+    subFolders: false,
     routes: () => {
       console.log(data);
-      return Object.keys(data.business);
-    },
+      const routes = [
+        ...Object.keys(data.business),
+      ];
+      Object.values(data.business).forEach((business) =>
+        business.stories.forEach((story) => routes.push(`${business.id}/${story.slug}`))
+      );
+
+      return routes;
+    }
   },
   /*
   ** Build configuration

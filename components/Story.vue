@@ -24,18 +24,14 @@
         v-if="story.image"
         key="img"
         :src="story.image">
-      <a
-        v-if="story.ctaLink"
+      <nuxt-link
+        v-if="story.slug"
         key="cta"
-        :href="story.ctaLink"
-        :style="{
-          backgroundColor: story.ctaColor,
-          color: story.ctaTextColor,
-        }"
-        target="_blank"
+        :to="story.slug"
+        append
         class="cta">
-        {{ story.ctaText }}
-      </a>
+        Read More
+      </nuxt-link>
     </transition-group>
   </div>
 </template>

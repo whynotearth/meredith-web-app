@@ -16,7 +16,7 @@
         mode="out-in">
         <story
           :story="story"
-          :key="story.name" />
+          :key="story.title.replace(' ', '_')" />
       </transition>
       <div class="slider">
         <div
@@ -36,7 +36,6 @@
   </div>
 </template>
 <script>
-import Cards from '@/components/Cards';
 import Story from '@/components/Story';
 
 export default {
@@ -44,7 +43,7 @@ export default {
   props: {
     'stories': {
       type: Array,
-      default: () => [],
+      default: [],
     },
     'brand': {
       type: String,
@@ -60,7 +59,7 @@ export default {
   }),
   computed: {
     story() {
-      return this.stories[this.storyId] || {};
+      return this.stories[this.storyId];
     },
     backgroundImage() {
       return this.stories[this.storyId].image || null;
@@ -175,11 +174,11 @@ header {
   transition: 0.2s;
 }
 .slide-enter {
-  transform: translate(10%);
-  opacity: 0.8;
+  // transform: translate(0, 10%);
+  // opacity: 0.8;
 }
 .slide-leave-to {
-  transform: translate(-10%);
-  opacity: 0.8;
+  // transform: translate(0, -10%);
+  // opacity: 0.8;
 }
 </style>

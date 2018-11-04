@@ -1,9 +1,9 @@
-const RehashTrash = require('./rehash-trash');
+import RehashTrash from './rehash-trash';
+import FaunaInFocus from './fauna-in-focus';
 
-const data = {
+export default {
   business: {
-    'rehash-trash': RehashTrash,
+    'rehash-trash': FaunaInFocus,
+    'fauna-in-focus': RehashTrash,
   },
 };
-
-module.exports = data;
