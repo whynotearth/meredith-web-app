@@ -1,6 +1,8 @@
 const pkg = require('./package');
 const axios = require('axios');
 
+const data = require('./cms');
+
 module.exports = {
   mode: 'universal',
 
@@ -21,6 +23,10 @@ module.exports = {
     ]
   },
 
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#fff' },
 
   /*
   ** Global CSS
@@ -51,10 +57,7 @@ module.exports = {
   },
 
   generate: {
-    routes: async function () {
-      const { data } = await axios.get('https://storage.googleapis.com/meredith-config/businesses.json');
-      return data.businesses.map(business => business.key);
-    }
+    routes: () => Object.keys(data.businesses),
   },
   /*
   ** Build configuration

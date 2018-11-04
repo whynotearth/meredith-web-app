@@ -1,26 +1,51 @@
 <template>
-  <div>
-    {{ item.name }}
-    <div
-      v-for="page in item.pages"
-      :key="page.name.replace(' ', '_')">
-
-      <article
-        v-for="(card, i) in page.cards"
-        :key="`${page.name.replace(' ', '_')}_card_${i}`">
-        {{ card.callToAction }}
-      </article>
+  <div class="wrapper">
+    <div class="content">
+      <div class="stories">
+        <stories
+          :brand="item.name"
+          :logo="item.logo"
+          :stories="item.stories"/>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import Stories from '@/components/Stories';
 
 export default {
+  components: { Stories },
   async asyncData({ app, params }) {
-    const { data } = await app.$axios.get('https://storage.googleapis.com/meredith-config/businesses.json');
-    return {
-      item: data.businesses.find(business => business.key === params.business),
-    }
+    const item = await import(`@/cms/${params.business}`);
+    return { item }
   },
 }
 </script>
+
+<style lang="scss" scoped>
+// @media (min-width:480px) and (max-width:639px), (min-width: 1024px){
+// }
+
+
+@media (min-width: 640px){
+  .wrapper {
+    display: flex;
+  }
+  .content {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 70%;
+  }
+}
+
+@media (min-width: 1024px){
+ .content {
+    flex-basis: 60%;
+  }
+}
+
+
+
+
+
+</style>
