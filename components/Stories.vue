@@ -127,6 +127,7 @@ export default {
   display: block;
   height: 100vh;
   border: 1px solid #eee;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .arrow {
   z-index: 10;
@@ -197,6 +198,7 @@ h1 {
     text-align: center;
     color: #fefefe;
     cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
 }
 

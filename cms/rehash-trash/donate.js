@@ -2,12 +2,12 @@ export default {
   name: 'donate',
   title: 'donate',
   slug: 'donate',
-  image: 'images/rehash-trash/1.jpg',
+  image: 'images/rehash-trash/2.jpg',
   stories: [
     {
       // title: 'Donate to us',
       content: 'We focus on product sales and workshops to generate our income; However, your donation can assist with a while host of holistic services that we provide',
-      image: 'images/rehash-trash/1.jpg',
+      image: 'images/rehash-trash/2.jpg',
       ctaLink: 'https://alink.com',
       contentColor: '#fff',
       contentBackgroundColor: 'rgba(0, 0, 0, 0.7)',
@@ -16,7 +16,7 @@ export default {
     {
       // title: 'Donate to us',
       content: 'We have regular group life skills sessions',
-      image: 'images/rehash-trash/1.jpg',
+      image: 'images/rehash-trash/4.jpg',
       ctaLink: 'https://alink.com',
       contentColor: '#fff',
       contentBackgroundColor: 'rgba(0, 0, 0, 0.7)',
@@ -25,7 +25,7 @@ export default {
     {
       // title: 'Donate to us',
       content: 'Additionally we have key skills something some thing',
-      image: 'images/rehash-trash/1.jpg',
+      image: 'images/rehash-trash/5.jpg',
       ctaLink: 'https://alink.com',
       contentColor: '#fff',
       contentBackgroundColor: 'rgba(0, 0, 0, 0.7)',

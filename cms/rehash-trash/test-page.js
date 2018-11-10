@@ -2,12 +2,12 @@ export default {
   name: 'test-page',
   title: 'Test Page',
   slug: 'test-page',
-  image: 'images/rehash-trash/1.jpg',
+  image: 'images/rehash-trash/7.jpg',
   stories: [
     {
       title: 'About me',
       content: 'This is some content for the ting',
-      image: 'images/rehash-trash/1.jpg',
+      image: 'images/rehash-trash/7.jpg',
       ctaLink: 'https://alink.com',
       contentColor: 'rgb(255, 204, 0)',
       contentBackgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -16,7 +16,7 @@ export default {
     {
       title: 'Tell Me',
       content: 'This is some content for the ting',
-      image: 'images/rehash-trash/1.jpg',
+      image: 'images/rehash-trash/3.jpg',
       ctaLink: 'https://alink.com',
       contentColor: 'rgb(255, 204, 0)',
       contentBackgroundColor: 'rgba(0, 0, 0, 0.8)',
