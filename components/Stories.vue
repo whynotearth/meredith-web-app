@@ -13,7 +13,7 @@
       <transition-group
         class="story__wrapper"
         name="slide"
-        mode="in-out">
+        mode="out-in">
         <header key="header">
           <nuxt-link :to="`/${home}?s=0`">
             <img
@@ -115,7 +115,7 @@ export default {
   background-repeat: no-repeat;
   filter: blur(15px);
   opacity: 0.3;
-  // transition: background-image 0.4s;
+  transition: background-image 0.2s;
 }
 
 .brand {
@@ -127,7 +127,6 @@ export default {
   position: relative;
   display: block;
   height: 100vh;
-  perspective: 2000px;
   overflow: hidden;
 }
 .arrow {
@@ -230,21 +229,19 @@ h1 {
 
 
 .slide-leave-active {
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .slide-enter-active {
   transition: 0.3s;
 }
+.slide-leave {
+  z-index: 1;
+}
 .slide-enter {
-  perspective-origin: 0% 50%;
-  transform-origin: right center;
-  transform: translateX(100%) rotateY(90deg);
-  z-index: 10;
-  // opacity: 0;
+  transform: translateX(100%);
+  z-index: 2;
 }
 .slide-leave-to {
-  // perspective-origin: 0% 50%;
-  // transform-origin: left center;
-  // transform: translateX(0%) rotateY(-90deg);
+  transform: translateX(-100%);
 }
 </style>
