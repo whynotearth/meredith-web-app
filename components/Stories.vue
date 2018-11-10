@@ -239,6 +239,7 @@ h1 {
   perspective-origin: 0% 50%;
   transform-origin: right center;
   transform: translateX(100%) rotateY(90deg);
+  z-index: 10;
   // opacity: 0;
 }
 .slide-leave-to {
