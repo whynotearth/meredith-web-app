@@ -1,5 +1,9 @@
 <template>
-  <div class="story">
+  <div
+    :style="{
+      backgroundImage: `url(/${story.image})`
+    }"
+    class="story">
     <transition-group name="fade">
       <h2
         v-if="story.title"
@@ -50,12 +54,15 @@ export default {
 <style lang="scss" scoped>
 .story {
   height: 100%;
+  width: 100%;
   position: absolute;
   top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 70px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .cta {
@@ -63,6 +70,7 @@ export default {
   line-height: 70px;
   text-align: center;
   background-color: #333;
+  background: linear-gradient(rgba(0, 0, 0, 0) 0,rgba(0, 0, 0, 0.8) 100%);
   font-weight: bold;
   color: #fff;
   position: absolute;
@@ -73,14 +81,17 @@ export default {
 }
 
 .title {
-  background-color: rgba(#333, 0.8);
+  background-color: rgba(#333, 0.7);
   color: #fff;
   text-align: center;
   padding: 10px;
   font-size: 2em;
-  position: absolute;
-  top: 72px;
-  width: 100%;
+  margin: 7px;
+  min-height: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // transform: translateY(-50%);
 }
 .content {
   background-color: rgba(#333, 0.8);
@@ -88,10 +99,6 @@ export default {
   text-align: center;
   padding: 10px;
   font-size: 1em;
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  // top: 200px;
 }
 
 img {
@@ -108,7 +115,7 @@ img {
     // border: 1px solid rgb(230, 230, 230);
     // background-color: #fefefe;
     // position: relative;
-        height: 100%;
+    height: 100%;
     width: 100%;
   }
 

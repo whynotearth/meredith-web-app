@@ -2,6 +2,11 @@
   <div
     class="container">
     <div
+      :style="{
+        backgroundImage: backgroundImage ? `url('/${backgroundImage}')` : null,
+      }"
+      class="background-image"/>
+    <div
       class="arrow"
       @click="navigateStory(-1)"> &#8249; </div>
     <div>
@@ -10,24 +15,13 @@
         name="slide"
         mode="out-in">
         <header key="header">
-          <nuxt-link :to="`/${home}`">
+          <nuxt-link :to="`/${home}?s=0`">
             <img
-              alt="Descriptive text"
               :src="`/${logo}`"
+              alt="Descriptive text"
               class="logo">
           </nuxt-link>
           <h1>{{ story.title }}</h1>
-          <div class="slider">
-            <div
-              v-for="(story, i) in story.stories"
-              :key="`slider_${i}`"
-              :class="{
-                'is-active': i === storyId,
-                'is-seen': i < storyId,
-              }"
-              class="slider__item"
-            />
-          </div>
         </header>
         <story
           v-for="(item, i) in story.stories"
@@ -38,6 +32,17 @@
           :title="story.title"
         />
       </transition-group>
+      <div class="slider">
+        <div
+          v-for="(story, i) in story.stories"
+          :key="`slider_${i}`"
+          :class="{
+            'is-active': i === storyId,
+            'is-seen': i < storyId,
+          }"
+          class="slider__item"
+        />
+      </div>
     </div>
     <div
       class="arrow"
@@ -98,6 +103,20 @@ export default {
   background-size: cover;
 }
 
+.background-image {
+  z-index: 0;
+  position: fixed;
+  top: -15px;
+  bottom: -15px;
+  left: -15px;
+  right: -15px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(15px);
+  opacity: 0.3;
+}
+
 .brand {
   font-size: 1.2em;
   padding: 10px 0;
@@ -107,7 +126,6 @@ export default {
   position: relative;
   display: block;
   height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.8) 0,rgba(255, 0, 0, 0) 100px);
   border: 1px solid #eee;
 }
 .arrow {
@@ -137,6 +155,7 @@ header {
   position: absolute;
   height: 70px;
   color: #fff;
+  background: linear-gradient(rgba(0, 0, 0, 0.7) 0,rgba(255, 0, 0, 0) 100%);
 }
 
 h1 {
@@ -166,16 +185,17 @@ h1 {
     height: 570px;
   }
   .arrow {
-    background-color: #fff;
+    background-color: #3f3f3f;
     border: 1px solid rgb(230, 230, 230);
     width: 60px;
     height: 60px;
+    border-radius: 50%;
     position: relative;
     margin: 10px;
     line-height: 50px;
     font-size: 3em;
     text-align: center;
-    color: #666;
+    color: #fefefe;
     cursor: pointer;
   }
 }
@@ -190,9 +210,9 @@ h1 {
   right: 0;
   &__item {
     height: 5px;
-    margin: 2px;
+    margin: 5px;
     flex: 1;
-    background-color: #e3e3e3;
+    background-color: #fff;
     transition: background-color 0.2s;
     &.is-active {
       background-color: #616161;
