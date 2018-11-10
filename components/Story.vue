@@ -1,15 +1,12 @@
 <template>
-  <div
-    :style="{ backgroundColor: story.backgroundColor }">
-    <transition-group
-      name="fade"
-      class="story">
-      <div
+  <div class="story">
+    <transition-group name="fade">
+      <h2
         v-if="story.title"
         key="title"
         class="title">
         {{ story.title }}
-      </div>
+      </h2>
       <div
         v-if="story.content"
         key="content"
@@ -20,10 +17,10 @@
         class="content">
         {{ story.content }}
       </div>
-      <img
+      <!-- <img
         v-if="story.image"
         key="img"
-        :src="story.image">
+        :src="`/${story.image}`"> -->
       <nuxt-link
         v-if="story.slug"
         key="cta"
@@ -52,11 +49,13 @@ export default {
 
 <style lang="scss" scoped>
 .story {
-  height: 100vh;
-  position: relative;
+  height: 100%;
+  position: absolute;
+  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 70px;
 }
 
 .cta {
@@ -68,6 +67,7 @@ export default {
   color: #fff;
   position: absolute;
   bottom: 0;
+  left: 0;
   width: 100%;
   text-decoration: none;
 }
@@ -79,7 +79,8 @@ export default {
   padding: 10px;
   font-size: 2em;
   position: absolute;
-  top: 2px;
+  top: 72px;
+  width: 100%;
 }
 .content {
   background-color: rgba(#333, 0.8);
@@ -99,22 +100,24 @@ img {
 
 @media (min-width: 550px){
   .story {
-    width: 320px;
-    height: 570px;
+    // width: 320px;
+    // height: 570px;
     z-index: 2;
-    position: relative;
+    // position: relative;
     overflow: hidden;
     // border: 1px solid rgb(230, 230, 230);
     // background-color: #fefefe;
-    position: relative;
+    // position: relative;
+        height: 100%;
+    width: 100%;
   }
 
 }
 
 .fade-enter-active, .fade-leave-active {
-  // transition: opacity .2s;
+  transition: opacity .2s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  // opacity: 0;
+  opacity: 0;
 }
 </style>

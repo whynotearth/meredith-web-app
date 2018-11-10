@@ -5,30 +5,38 @@
       class="arrow"
       @click="navigateStory(-1)"> &#8249; </div>
     <div>
-      <header>
-        <img
-          :src="logo"
-          class="logo">
-        <h1>{{ brand }}</h1>
-      </header>
-      <transition
+      <transition-group
+        class="story__wrapper"
         name="slide"
         mode="out-in">
+        <header key="header">
+          <nuxt-link :to="`/${home}`">
+            <img
+              :src="`/${logo}`"
+              class="logo">
+          </nuxt-link>
+          <h1>{{ story.title }}</h1>
+          <div class="slider">
+            <div
+              v-for="(story, i) in story.stories"
+              :key="`slider_${i}`"
+              :class="{
+                'is-active': i === storyId,
+                'is-seen': i < storyId,
+              }"
+              class="slider__item"
+            />
+          </div>
+        </header>
         <story
-          :story="story"
-          :key="story.name" />
-      </transition>
-      <div class="slider">
-        <div
-          v-for="(story, i) in stories"
-          :key="`${story.title.replace(' ', '_')}_${i}`"
-          :class="{
-            'is-active': i === storyId,
-            'is-seen': i < storyId,
-          }"
-          class="slider__item"
+          v-for="(item, i) in story.stories"
+          v-show="i === storyId"
+          :key="`story_${i}`"
+          :story="item"
+          :logo="logo"
+          :title="story.title"
         />
-      </div>
+      </transition-group>
     </div>
     <div
       class="arrow"
@@ -36,17 +44,20 @@
   </div>
 </template>
 <script>
-import Cards from '@/components/Cards';
 import Story from '@/components/Story';
 
 export default {
   components: { Story },
   props: {
-    'stories': {
-      type: Array,
-      default: () => [],
+    'story': {
+      type: Object,
+      default: () => {},
     },
     'brand': {
+      type: String,
+      default: '',
+    },
+    'home': {
       type: String,
       default: '',
     },
@@ -59,19 +70,21 @@ export default {
     storyId: 0,
   }),
   computed: {
-    story() {
-      return this.stories[this.storyId] || {};
-    },
     backgroundImage() {
-      return this.stories[this.storyId].image || null;
+      return this.story.stories[this.storyId].image || null;
     },
+  },
+  created() {
+    this.storyId = parseInt(this.$route.query.s) || 0;
+    this.$router.push({ query: { s: this.storyId } });
   },
   methods: {
     navigateStory(id) {
       const newId = this.storyId + id;
-      this.storyId = this.stories[newId] ? newId : (
-        newId < 0 ? this.stories.length-1 : 0
+      this.storyId = this.story.stories[newId] ? newId : (
+        newId < 0 ? this.story.stories.length-1 : 0
       );
+      this.$router.push({ query: { s: this.storyId } });
     },
   },
 }
@@ -89,6 +102,13 @@ export default {
   padding: 10px 0;
 }
 
+.story__wrapper {
+  position: relative;
+  display: block;
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.8) 0,rgba(255, 0, 0, 0) 100px);
+  border: 1px solid #eee;
+}
 .arrow {
   z-index: 10;
   background-color: transparent;
@@ -96,6 +116,7 @@ export default {
   height: 100vh;
   position: absolute;
   top: 0;
+  color: transparent;
 
   &:first-of-type {
     left: 0;
@@ -104,30 +125,44 @@ export default {
     right: 0;
   }
 }
+
 header {
-  display: none;
+  display: flex;
+  align-items: center;
+  left: 0;
+  right: 0;
+  // font-size: 0.8em;
+  z-index: 10;
+  position: absolute;
+  height: 70px;
+  color: #fff;
+}
+
+h1 {
+  font-size: 1em;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+.logo {
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border: 1px solid #eee;
+  // border-radius: 3px;
 }
 @media (min-width: 550px){
-  header {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: #fff;
-    z-index: 10;
-    position: relative;
-    border: 1px solid #eee;
-  }
 
-  h1 {
-    font-size: 1.2em;
-    margin: 0 10px;
-  }
   .container {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background-color: #fafafa;
+  }
+
+  .story__wrapper {
+    width: 320px;
+    height: 570px;
   }
   .arrow {
     background-color: #fff;
@@ -142,18 +177,16 @@ header {
     color: #666;
     cursor: pointer;
   }
-
-  .logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
 }
 
 .slider {
   display: flex;
   align-items: stretch;
   justify-content: space-around;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   &__item {
     height: 5px;
     margin: 2px;
@@ -170,16 +203,18 @@ header {
 }
 
 
-.slide-leave-active,
+.slide-leave-active {
+  transition: 0s;
+}
 .slide-enter-active {
-  transition: 0.2s;
+  transition: 0.8s;
 }
 .slide-enter {
-  transform: translate(10%);
-  opacity: 0.8;
+  // transform: translate(10%);
+  opacity: 0;
 }
 .slide-leave-to {
-  transform: translate(-10%);
-  opacity: 0.8;
+  // transform: translate(-10%);
+  opacity: 0;
 }
 </style>

@@ -5,5 +5,32 @@ export default {
   content: 'This is some content for the ting',
   image: 'images/rehash-trash/1.jpg',
   stories: [
+    {
+      title: 'Buy 1 thing',
+      content: 'This is some content for the ting',
+      image: 'images/rehash-trash/1.jpg',
+      ctaLink: 'https://alink.com',
+      contentColor: 'rgb(255, 204, 0)',
+      contentBackgroundColor: 'rgba(0, 0, 0, 0.8)',
+      backgroundColor: '#333',
+    },
+    {
+      title: 'Buy 2 thing',
+      content: 'This is some content for the ting',
+      image: 'images/rehash-trash/1.jpg',
+      ctaLink: 'https://alink.com',
+      contentColor: 'rgb(255, 204, 0)',
+      contentBackgroundColor: 'rgba(0, 0, 0, 0.8)',
+      backgroundColor: '#333',
+    },
+    {
+      title: 'Buy 3 thing',
+      content: 'This is some content for the ting',
+      image: 'images/rehash-trash/1.jpg',
+      ctaLink: 'https://alink.com',
+      contentColor: 'rgb(255, 204, 0)',
+      contentBackgroundColor: 'rgba(0, 0, 0, 0.8)',
+      backgroundColor: '#333',
+    },
   ],
 };

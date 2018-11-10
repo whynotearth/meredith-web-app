@@ -1,9 +1,10 @@
 <template>
   <div>
     <stories
-      :brand="item.name"
-      :logo="item.logo"
-      :stories="item.stories"/>
+      :brand="business.name"
+      :logo="business.logo"
+      :home="business.id"
+      :story="story"/>
   </div>
 </template>
 <script>
@@ -11,9 +12,10 @@ import Stories from '@/components/Stories';
 export default {
   components: { Stories },
   async asyncData({ app, params }) {
-    const itemModule = await import(`@/cms/${params.business}/${params.story}.js`);
-    const item = itemModule.default ? itemModule.default : itemModule
-    return { item };
+    const { business } = await import(`@/cms/${params.business}`);
+    const story = await import(`@/cms/${params.business}/${params.story}.js`);
+
+    return { story: story.default ? story.default : story, business };
   },
 }
 </script>

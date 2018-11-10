@@ -1,12 +1,19 @@
 import Donate from './donate';
 import TestPage from './test-page';
 
-export default {
+export const business = {
   id: 'fauna-in-focus',
   name: 'Fauna In Focus',
   logo: 'images/rehash-trash/logo.jpg',
-  stories: [
-    Donate,
-    TestPage,
-  ],
+  title: 'Doing something cool',
+};
+
+export const stories = [
+  Donate,
+  TestPage,
+];
+
+export default {
+  business,
+  stories,
 };
