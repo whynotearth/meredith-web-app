@@ -59,12 +59,11 @@ module.exports = {
   generate: {
     subFolders: false,
     routes: () => {
-      console.log(data);
       const routes = [
         ...Object.keys(data.business),
       ];
-      Object.values(data.business).forEach((business) =>
-        business.stories.forEach((story) => routes.push(`${business.id}/${story.slug}`))
+      Object.values(data.business).forEach(({business, stories}) =>
+        stories.forEach((story) => routes.push(`${business.id}/${story.slug}`))
       );
 
       return routes;
