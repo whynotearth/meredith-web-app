@@ -62,7 +62,7 @@ export default {
   height: 70px;
   line-height: 70px;
   text-align: center;
-  background-color: #ccc;
+  background-color: #fc0;
   font-weight: bold;
   color: #fff;
   position: absolute;

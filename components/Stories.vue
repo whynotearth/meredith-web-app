@@ -12,6 +12,7 @@
         <header key="header">
           <nuxt-link :to="`/${home}`">
             <img
+              alt="Descriptive text"
               :src="`/${logo}`"
               class="logo">
           </nuxt-link>
