@@ -253,12 +253,12 @@ h1 {
   // transform: scale(1.1);
   z-index: 2;
   opacity: 0;
-  filter: blur(10px);
+  // filter: blur(10px);
 }
 .slide-leave-to {
   // transform: scale(1.1);
   z-index: 0;
   opacity: 0;
-  filter: blur(10px);
+  // filter: blur(10px);
 }
 </style>
