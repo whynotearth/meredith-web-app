@@ -1,10 +1,13 @@
 <template>
   <div
-    :style="{
-      backgroundImage: `url(/${story.image})`
-    }"
     class="story">
     <transition-group name="fade">
+      <div
+        key="image"
+        :style="{
+          backgroundImage: `url(/${story.image})`,
+        }"
+        class="story__background-image"/>
       <h2
         v-if="story.title"
         key="title"
@@ -60,9 +63,26 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.story__background-image {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
+  animation: zoomin 120s linear;
+  animation-fill-mode: forwards;
+  z-index: -1;
+}
+
+@keyframes zoomin {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(2);
+  }
 }
 
 .cta {
@@ -78,6 +98,7 @@ export default {
   left: 0;
   width: 100%;
   text-decoration: none;
+  z-index: 20;
 }
 
 .title {

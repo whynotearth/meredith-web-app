@@ -2,13 +2,13 @@
   <div
     class="container">
     <div
+      class="arrow"
+      @click="navigateStory(-1)"> &#8249; </div>
+    <div
       :style="{
         backgroundImage: backgroundImage ? `url('/${backgroundImage}')` : null,
       }"
       class="background-image"/>
-    <div
-      class="arrow"
-      @click="navigateStory(-1)"> &#8249; </div>
     <div>
       <transition-group
         class="story__wrapper"
@@ -31,18 +31,20 @@
           :logo="logo"
           :title="story.title"
         />
-      </transition-group>
-      <div class="slider">
         <div
-          v-for="(story, i) in story.stories"
-          :key="`slider_${i}`"
-          :class="{
-            'is-active': i === storyId,
-            'is-seen': i < storyId,
-          }"
-          class="slider__item"
-        />
-      </div>
+          key="slider"
+          class="slider">
+          <div
+            v-for="(story, i) in story.stories"
+            :key="`slider_${i}`"
+            :class="{
+              'is-active': i === storyId,
+              'is-seen': i < storyId,
+            }"
+            class="slider__item"
+          />
+        </div>
+      </transition-group>
     </div>
     <div
       class="arrow"
@@ -99,8 +101,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .background-image {
@@ -115,7 +115,7 @@ export default {
   background-repeat: no-repeat;
   filter: blur(15px);
   opacity: 0.3;
-  transition: background-image 0.2s;
+  transition: background-image 0.3s;
 }
 
 .brand {
@@ -128,21 +128,25 @@ export default {
   display: block;
   height: 100vh;
   overflow: hidden;
+  background-color: #333;
+  perspective: 640px;
+  perspective-origin: 0 50%;
 }
 .arrow {
   z-index: 10;
   background-color: transparent;
-  width: 45vw;
-  height: 100vh;
   position: absolute;
-  top: 0;
+  top: 90px;
+  bottom: 90px;
   color: transparent;
 
   &:first-of-type {
     left: 0;
+    width: 30%;
   }
   &:last-of-type {
     right: 0;
+    width: 70%;
   }
 }
 
@@ -188,11 +192,10 @@ h1 {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   }
   .arrow {
-    background-color: #3f3f3f;
-    border: 1px solid rgb(230, 230, 230);
-    width: 60px;
+    background-color: #0099CC;
+    // border: 1px solid rgb(230, 230, 230);
     height: 60px;
-    border-radius: 50%;
+    // border-radius: 50%;
     position: relative;
     margin: 10px;
     line-height: 50px;
@@ -200,7 +203,14 @@ h1 {
     text-align: center;
     color: #fefefe;
     cursor: pointer;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.16), 0 1px 2px rgba(0,0,0,0.23);
+
+    &:first-of-type {
+      width: 60px;
+    }
+    &:last-of-type {
+      width: 60px;
+    }
   }
 }
 
@@ -212,17 +222,19 @@ h1 {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 5;
+  background-color: #333;
   &__item {
     height: 5px;
     margin: 5px;
     flex: 1;
-    background-color: #fff;
+    background-color: #616161;
     transition: background-color 0.2s;
     &.is-active {
-      background-color: #616161;
+      background-color: #efefef;
     }
     &.is-seen {
-      background-color: #acacac;
+      background-color: #717171;
     }
   }
 }
@@ -238,10 +250,15 @@ h1 {
   z-index: 1;
 }
 .slide-enter {
-  transform: translateX(100%);
+  // transform: scale(1.1);
   z-index: 2;
+  opacity: 0;
+  filter: blur(10px);
 }
 .slide-leave-to {
-  transform: translateX(-100%);
+  // transform: scale(1.1);
+  z-index: 0;
+  opacity: 0;
+  filter: blur(10px);
 }
 </style>
