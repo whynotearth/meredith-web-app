@@ -2,6 +2,7 @@
   <div
     class="story">
     <transition-group name="fade">
+      
       <div
         key="image"
         :style="{
@@ -14,6 +15,7 @@
         class="title">
         {{ story.title }}
       </h2>
+      
       <div
         v-if="story.content"
         key="content"
@@ -24,10 +26,11 @@
         class="content">
         {{ story.content }}
       </div>
-      <!-- <img
-        v-if="story.image"
-        key="img"
-        :src="`/${story.image}`"> -->
+      
+      <img
+        v-if="story.product"
+        key="product"
+        :src="`/${story.product}`">
       <nuxt-link
         v-if="story.slug"
         key="cta"

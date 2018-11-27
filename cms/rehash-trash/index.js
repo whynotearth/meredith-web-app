@@ -1,5 +1,6 @@
 import Donate from './donate';
 import Recycling from './recycling';
+import Products from './products';
 import TestPage from './test-page';
 
 export const business = {
@@ -12,6 +13,7 @@ export const business = {
 export const stories = [
   Recycling,
   Donate,
+  Products,
   TestPage,
 ];
 
