@@ -19,6 +19,7 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'canonical', href: '/' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat:400,700' },
     ]
   },
 
@@ -62,9 +63,11 @@ module.exports = {
         ...Object.keys(data.business),
       ];
       Object.values(data.business).forEach(({business, stories}) =>
-        stories.forEach((story) => routes.push(`${business.id}/${story.slug}`))
-      );
-
+        stories.forEach((story) => {
+          if (story.slug) {
+            routes.push(`${business.id}/${story.slug}`);
+          }
+        }));
       return routes;
     }
   },

@@ -15,13 +15,28 @@
         name="slide"
         mode="out-in">
         <header key="header">
-          <nuxt-link :to="`/${home}?s=0`">
-            <img
-              :src="`/${logo}`"
-              alt="Descriptive text"
-              class="logo">
-          </nuxt-link>
-          <h1>{{ story.title }}</h1>
+          <div
+            key="slider"
+            class="slider">
+            <div
+              v-for="(story, i) in story.stories"
+              :key="`slider_${i}`"
+              :class="{
+                'is-active': i === storyId,
+                'is-seen': i < storyId,
+              }"
+              class="slider__item"
+            />
+          </div>
+          <section class="content__wrapper">
+            <nuxt-link :to="`/${home}?s=0`">
+              <img
+                :src="`/${logo}`"
+                alt="Descriptive text"
+                class="logo">
+            </nuxt-link>
+            <h1>{{ story.title }}</h1>
+          </section>
         </header>
         <story
           v-for="(item, i) in story.stories"
@@ -31,19 +46,6 @@
           :logo="logo"
           :title="story.title"
         />
-        <div
-          key="slider"
-          class="slider">
-          <div
-            v-for="(story, i) in story.stories"
-            :key="`slider_${i}`"
-            :class="{
-              'is-active': i === storyId,
-              'is-seen': i < storyId,
-            }"
-            class="slider__item"
-          />
-        </div>
       </transition-group>
     </div>
     <div
@@ -114,8 +116,8 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   filter: blur(15px);
-  opacity: 0.3;
-  transition: background-image 0.3s;
+  opacity: 0.2;
+  // transition: background-image 0.3s;
 }
 
 .brand {
@@ -151,16 +153,19 @@ export default {
 }
 
 header {
-  display: flex;
-  align-items: center;
   left: 0;
   right: 0;
   // font-size: 0.8em;
   z-index: 10;
   position: absolute;
-  height: 70px;
+  height: 100px;
   color: #fff;
-  background: linear-gradient(rgba(0, 0, 0, 0.7) 0,rgba(255, 0, 0, 0) 100%);
+  background: linear-gradient(#2F2F2F 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.content__wrapper {
+  display: flex;
+  align-items: center;
 }
 
 h1 {
@@ -171,8 +176,8 @@ h1 {
 .logo {
   width: 50px;
   height: 50px;
-  margin: 10px;
-  border: 1px solid #eee;
+  margin: 5px 15px;
+  // border: 1px solid #eee;
   // border-radius: 3px;
 }
 @media (min-width: 550px){
@@ -182,20 +187,21 @@ h1 {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #fafafa;
+    background-color: #6f6f6f;
   }
 
   .story__wrapper {
     width: 320px;
     height: 570px;
-    border: 1px solid #eee;
+    // border-radius: 7px;
+    border: 1px solid #666;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   }
   .arrow {
-    background-color: #0099CC;
+    background-color: rgba(#fff, 0.2);
     // border: 1px solid rgb(230, 230, 230);
     height: 60px;
-    // border-radius: 50%;
+    border-radius: 50%;
     position: relative;
     margin: 10px;
     line-height: 50px;
@@ -218,33 +224,30 @@ h1 {
   display: flex;
   align-items: stretch;
   justify-content: space-around;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   z-index: 5;
-  background-color: #333;
+  position: relative;
   &__item {
+    border-radius: 5px;
     height: 5px;
     margin: 5px;
     flex: 1;
-    background-color: #616161;
+    background-color: #464646;
     transition: background-color 0.2s;
     &.is-active {
-      background-color: #efefef;
+      background-color: #fff;
     }
     &.is-seen {
-      background-color: #717171;
+      background-color: #464646;
     }
   }
 }
 
 
 .slide-leave-active {
-  transition: 0.3s;
+  // transition: 0.3s;
 }
 .slide-enter-active {
-  transition: 0.3s;
+  // transition: 0.3s;
 }
 .slide-leave {
   z-index: 1;

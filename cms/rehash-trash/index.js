@@ -1,18 +1,22 @@
-import Donate from './donate';
-import Recycling from './recycling';
-import TestPage from './test-page';
+import OurStory from './our-story';
+import Contact from './contact';
 
 export const business = {
   id: 'rehash-trash',
   name: 'Rehash Trash',
-  logo: 'images/rehash-trash/logo.jpg',
-  title: 'Our Story'
+  logo: 'images/rehash-trash/logo.jpeg',
+  title: 'Rehash Trash',
 };
 
 export const stories = [
-  Recycling,
-  Donate,
-  TestPage,
+  {
+    name: 'home',
+    image: 'images/rehash-trash/1.jpeg',
+    blur: '5px',
+    slug: '',
+  },
+  Contact,
+  OurStory,
 ];
 
 export default {

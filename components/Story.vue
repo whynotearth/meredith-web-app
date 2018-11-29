@@ -6,6 +6,7 @@
         key="image"
         :style="{
           backgroundImage: `url(/${story.image})`,
+          filter: `blur(${story.blur})`,
         }"
         class="story__background-image"/>
       <h2
@@ -24,17 +25,13 @@
         class="content">
         {{ story.content }}
       </div>
-      <!-- <img
-        v-if="story.image"
-        key="img"
-        :src="`/${story.image}`"> -->
       <nuxt-link
         v-if="story.slug"
         key="cta"
         :to="story.slug"
         append
         class="cta">
-        Read More
+        Learn More
       </nuxt-link>
     </transition-group>
   </div>
@@ -76,22 +73,24 @@ export default {
   z-index: -1;
 }
 
+
+
 @keyframes zoomin {
   0% {
-    transform: scale(1);
+    transform: scale(1.1);
   }
   100% {
-    transform: scale(2);
+    transform: scale(1.5);
   }
 }
 
 .cta {
-  height: 70px;
-  line-height: 70px;
+  height: 100px;
+  line-height: 100px;
   text-align: center;
   background-color: #333;
-  background: linear-gradient(rgba(0, 0, 0, 0) 0,rgba(0, 0, 0, 0.8) 100%);
-  font-weight: bold;
+  background: linear-gradient(rgba(0, 0, 0, 0) 0, #2F2F2F 100%);
+  font-weight: 400;
   color: #fff;
   position: absolute;
   bottom: 0;
@@ -102,12 +101,14 @@ export default {
 }
 
 .title {
-  background-color: rgba(#333, 0.7);
+  background-color: rgba(47, 47, 47, 0.8);
   color: #fff;
   text-align: center;
   padding: 10px;
-  font-size: 2em;
-  margin: 7px;
+  font-size: 1.8em;
+  line-height: 1em;
+  text-transform: uppercase;
+  // margin: 7px;
   min-height: 3em;
   display: flex;
   flex-direction: column;
@@ -115,11 +116,20 @@ export default {
   // transform: translateY(-50%);
 }
 .content {
-  background-color: rgba(#333, 0.8);
+  background-color: rgba(17, 17, 17, 0.7);
   color: #fff;
-  text-align: center;
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 1em;
+  line-height: 1em;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  white-space: pre-line;
 }
 
 img {
