@@ -42,7 +42,7 @@
         </header>
         <story
           v-for="(item, i) in story.stories"
-          v-show="i === storyId"
+          v-show="i === storyId || i === storyId+1"
           :key="`story_${i}`"
           :story="item"
           :logo="logo"

@@ -61,6 +61,14 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  $target: 0;
+  $index: 10;
+  @while $index > 0 {
+    &:nth-child(#{$target}){ z-index: #{$index}; }
+    $target: $target + 1;
+    $index: $index - 1;
+  }
 }
 
 .story__background-image {
