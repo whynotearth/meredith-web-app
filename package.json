@@ -13,10 +13,14 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/free-solid-svg-icons": "^5.5.0",
     "@nuxtjs/axios": "^5.0.0",
+    "@nuxtjs/font-awesome": "^1.0.3",
     "@nuxtjs/pwa": "^2.6.0",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.2.0"
+    "nuxt": "^2.2.0",
+    "nuxt-fontawesome": "^0.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

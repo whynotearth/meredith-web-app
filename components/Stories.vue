@@ -3,7 +3,9 @@
     class="container">
     <div
       class="arrow"
-      @click="navigateStory(-1)"> &#8249; </div>
+      @click="navigateStory(-1)">
+      <fa :icon="['fas', 'chevron-left']" />
+    </div>
     <div
       :style="{
         backgroundImage: backgroundImage ? `url('/${backgroundImage}')` : null,
@@ -50,7 +52,9 @@
     </div>
     <div
       class="arrow"
-      @click="navigateStory(1)"> &#8250; </div>
+      @click="navigateStory(1)">
+      <fa :icon="['fas', 'chevron-right']" />
+    </div>
   </div>
 </template>
 <script>
@@ -202,12 +206,14 @@ h1 {
     // border: 1px solid rgb(230, 230, 230);
     height: 60px;
     border-radius: 50%;
-    position: relative;
+    position: initial;
     margin: 10px;
-    line-height: 50px;
-    font-size: 3em;
+    text-align: center;
+    line-height: 2em;
+    font-size: 2em;
     text-align: center;
     color: #fefefe;
+    opacity: 0.7;
     cursor: pointer;
     box-shadow: 0 1px 2px rgba(0,0,0,0.16), 0 1px 2px rgba(0,0,0,0.23);
 
@@ -244,10 +250,10 @@ h1 {
 
 
 .slide-leave-active {
-  // transition: 0.3s;
+  transition: 0.5s;
 }
 .slide-enter-active {
-  // transition: 0.3s;
+  transition: 0.5s;
 }
 .slide-leave {
   z-index: 1;
@@ -255,13 +261,13 @@ h1 {
 .slide-enter {
   // transform: scale(1.1);
   z-index: 2;
-  opacity: 0;
-  // filter: blur(10px);
+  // opacity: 0;
+  filter: blur(3px);
 }
 .slide-leave-to {
   // transform: scale(1.1);
   z-index: 0;
-  opacity: 0;
-  // filter: blur(10px);
+  // opacity: 0;
+  filter: blur(10px);
 }
 </style>

@@ -31,6 +31,7 @@
         :to="story.slug"
         append
         class="cta">
+        <fa :icon="['fas', 'chevron-up']" />
         Learn More
       </nuxt-link>
     </transition-group>
@@ -86,7 +87,7 @@ export default {
 
 .cta {
   height: 100px;
-  line-height: 100px;
+  // line-height: 100px;
   text-align: center;
   background-color: #333;
   background: linear-gradient(rgba(0, 0, 0, 0) 0, #2F2F2F 100%);
@@ -98,6 +99,11 @@ export default {
   width: 100%;
   text-decoration: none;
   z-index: 20;
+
+  svg {
+    display: block;
+    margin: 10px auto 20px auto;
+  }
 }
 
 .title {
@@ -119,8 +125,8 @@ export default {
   background-color: rgba(17, 17, 17, 0.7);
   color: #fff;
   padding: 10px 20px;
-  font-size: 1em;
-  line-height: 1em;
+  font-size: 1.1em;
+  line-height: 1.3em;
   position: absolute;
   display: flex;
   flex-direction: column;
