@@ -15,8 +15,8 @@ export const stories = [
     blur: '5px',
     slug: '',
   },
-  Contact,
   OurStory,
+  Contact,
 ];
 
 export default {
