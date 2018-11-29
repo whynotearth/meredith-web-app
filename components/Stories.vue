@@ -250,10 +250,10 @@ h1 {
 
 
 .slide-leave-active {
-  transition: 0.5s;
+  // transition: 0.5s;
 }
 .slide-enter-active {
-  transition: 0.5s;
+  // transition: 0.5s;
 }
 .slide-leave {
   z-index: 1;
@@ -262,12 +262,12 @@ h1 {
   // transform: scale(1.1);
   z-index: 2;
   // opacity: 0;
-  filter: blur(3px);
+  // filter: blur(3px);
 }
 .slide-leave-to {
   // transform: scale(1.1);
   z-index: 0;
   // opacity: 0;
-  filter: blur(10px);
+  // filter: blur(10px);
 }
 </style>
