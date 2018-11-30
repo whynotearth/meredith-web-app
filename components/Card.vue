@@ -94,8 +94,10 @@ export default {
 }
 
 .cta {
-  height: 100px;
-  // line-height: 100px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   background-color: #333;
   background: linear-gradient(rgba(0, 0, 0, 0) 0, #2F2F2F 100%);
@@ -110,7 +112,7 @@ export default {
 
   svg {
     display: block;
-    margin: 10px auto 20px auto;
+    margin: 10px auto;
   }
 }
 
@@ -163,12 +165,5 @@ img {
     width: 100%;
   }
 
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .2s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
 }
 </style>

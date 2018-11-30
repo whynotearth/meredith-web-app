@@ -14,12 +14,14 @@
         :logo="logo"
         :home="home"/>
 
-      <card
-        v-for="(item, i) in story.stories"
-        v-show="i === storyId || i === storyId+1"
-        :key="`story_${i}`"
-        :story="item"
-      />
+      <transition-group name="fade">
+        <card
+          v-for="(item, i) in story.stories"
+          v-show="i === storyId || i === storyId+1"
+          :key="`story_${i}`"
+          :story="item"
+        />
+      </transition-group>
 
       <bookend
         key="bookend"
@@ -114,6 +116,13 @@ export default {
     border: 1px solid #666;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 
 
