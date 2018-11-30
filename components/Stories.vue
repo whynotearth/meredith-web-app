@@ -45,8 +45,6 @@
           v-show="i === storyId || i === storyId+1"
           :key="`story_${i}`"
           :story="item"
-          :logo="logo"
-          :title="story.title"
         />
       </transition-group>
     </div>
@@ -86,6 +84,12 @@ export default {
   computed: {
     backgroundImage() {
       return this.story.stories[this.storyId].image || null;
+    },
+  },
+  watch: {
+    '$route'() {
+      this.storyId = parseInt(this.$route.query.s) || 0;
+      this.$router.push({ query: { s: this.storyId } });
     },
   },
   created() {

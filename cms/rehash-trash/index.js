@@ -13,7 +13,6 @@ export const stories = [
     name: 'home',
     image: 'images/rehash-trash/1.jpeg',
     blur: '5px',
-    slug: '',
   },
   OurStory,
   Contact,

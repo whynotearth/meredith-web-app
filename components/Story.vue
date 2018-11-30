@@ -1,6 +1,6 @@
 <template>
   <div
-    class="story">
+    :class="['story', story.type]">
     <transition-group name="fade">
       <div
         key="image"
@@ -26,13 +26,13 @@
         {{ story.content }}
       </div>
       <nuxt-link
-        v-if="story.slug"
+        v-if="story.ctaLink"
         key="cta"
-        :to="story.slug"
+        :to="story.ctaLink"
         append
         class="cta">
         <fa :icon="['fas', 'chevron-up']" />
-        Learn More
+        {{ story.ctaText }}
       </nuxt-link>
     </transition-group>
   </div>
@@ -133,8 +133,8 @@ export default {
   background-color: rgba(17, 17, 17, 0.7);
   color: #fff;
   padding: 10px 20px;
-  font-size: 1.1em;
-  line-height: 1.3em;
+  font-size: 1em;
+  line-height: 1.2em;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -150,16 +150,15 @@ img {
   width: 100%;
 }
 
+.story-card {
+  .cta {
+    background: linear-gradient(360deg, #6081F2 0%, rgba(0, 0, 0, 0) 100%);
+  }
+}
 @media (min-width: 550px){
   .story {
-    // width: 320px;
-    // height: 570px;
     z-index: 2;
-    // position: relative;
     overflow: hidden;
-    // border: 1px solid rgb(230, 230, 230);
-    // background-color: #fefefe;
-    // position: relative;
     height: 100%;
     width: 100%;
   }
