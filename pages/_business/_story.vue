@@ -1,6 +1,6 @@
 <template>
   <div>
-    <stories
+    <story
       :brand="business.name"
       :logo="business.logo"
       :home="business.id"
@@ -8,9 +8,14 @@
   </div>
 </template>
 <script>
-import Stories from '@/components/Stories';
+import Story from '@/components/Story';
 export default {
-  components: { Stories },
+  components: { Story },
+  // key: to => to.fullPath,
+  transition(to, from) {
+    if (!from) return 'slide-left'
+    return +to.query.page < +from.query.page ? 'slide-right' : 'slide-left'
+  },
   async asyncData({ app, params }) {
     const { business } = await import(`@/cms/${params.business}`);
     const story = await import(`@/cms/${params.business}/${params.story}.js`);
@@ -19,4 +24,3 @@ export default {
   },
 }
 </script>
-

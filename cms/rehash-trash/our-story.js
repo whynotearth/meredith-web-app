@@ -1,6 +1,7 @@
 export default {
   name: 'our-story',
   title: 'Our Story',
+  h2: 'Rehash Trash: Recycling Rubbish, Renewing Lives',
   slug: 'our-story',
   image: 'images/rehash-trash/2.jpeg',
   ctaText: 'Learn More',
@@ -15,7 +16,7 @@ export default {
       image: 'images/rehash-trash/ourstory-1.jpeg',
       blur: '2px',
       ctaText: 'Show Now',
-      ctaLink: 'https://google.com',
+      ctaLink: '/rehash-trash/shop',
       type: 'story-card',
     },
     {
@@ -23,7 +24,7 @@ export default {
       image: 'images/rehash-trash/ourstory-2.jpeg',
       blur: '2px',
       ctaText: 'Show Now',
-      ctaLink: 'https://google.com',
+      ctaLink: '/rehash-trash/shop',
       type: 'story-card',
     },
     {
@@ -31,7 +32,7 @@ export default {
       image: 'images/rehash-trash/ourstory-3.jpeg',
       blur: '2px',
       ctaText: 'Show Now',
-      ctaLink: 'https://google.com',
+      ctaLink: '/rehash-trash/shop',
       type: 'story-card',
     },
     {
@@ -39,7 +40,7 @@ export default {
       image: 'images/rehash-trash/ourstory-4.jpeg',
       blur: '2px',
       ctaText: 'Show Now',
-      ctaLink: 'https://google.com',
+      ctaLink: '/rehash-trash/shop',
       type: 'story-card',
     },
     {
@@ -47,7 +48,7 @@ export default {
       image: 'images/rehash-trash/ourstory-5.jpeg',
       blur: '2px',
       ctaText: 'Show Now',
-      ctaLink: 'https://google.com',
+      ctaLink: '/rehash-trash/shop',
       type: 'story-card',
     },
   ],

@@ -1,174 +1,120 @@
 <template>
   <div
-    :class="['story', story.type]">
-    <transition-group name="fade">
-      <div
-        key="image"
-        :style="{
-          backgroundImage: `url(/${story.image})`,
-          filter: `blur(${story.blur})`,
-        }"
-        class="story__background-image"/>
-      <h2
-        v-if="story.title"
-        key="title"
-        class="title">
-        {{ story.title }}
-      </h2>
-      <div
-        v-if="story.content"
-        key="content"
-        :style="{
-          backgroundColor: story.contentBackgroundColor,
-          color: story.contentColor,
-        }"
-        class="content">
-        {{ story.content }}
-      </div>
-      <nuxt-link
-        v-if="story.ctaLink"
-        key="cta"
-        :to="story.ctaLink"
-        append
-        class="cta">
-        <fa :icon="['fas', 'chevron-up']" />
-        {{ story.ctaText }}
-      </nuxt-link>
-    </transition-group>
+    class="container">
+    <navigate
+      left
+      @click="navigateStory(-1)" />
+    <background :image="backgroundImage"/>
+    <section class="story__wrapper">
+      <story-header
+        key="header"
+        :title="story.title"
+        :length="story.stories.length"
+        :story-id="storyId"
+        :logo="logo"
+        :home="home"/>
+
+      <card
+        v-for="(item, i) in story.stories"
+        v-show="i === storyId || i === storyId+1"
+        :key="`story_${i}`"
+        :story="item"
+      />
+
+      <bookend
+        key="bookend"
+        story/>
+    </section>
+    <navigate
+      right
+      @click="navigateStory(1)" />
   </div>
 </template>
 <script>
+import Card from '@/components/Card';
+import StoryHeader from '@/components/StoryHeader';
+import Background from '@/components/Background';
+import Bookend from '@/components/Bookend';
+import Navigate from '@/components/Navigate';
+
 export default {
+  components: { Card, StoryHeader, Bookend, Navigate, Background },
   props: {
     'story': {
       type: Object,
-      default: {
-        name: '',
-        content: '',
-        cta: '',
-      },
+      default: () => {},
+    },
+    'home': {
+      type: String,
+      default: '',
+    },
+    'logo': {
+      type: String,
+      default: '',
+    },
+  },
+  data: () => ({
+    storyId: 0,
+  }),
+  computed: {
+    backgroundImage() {
+      return this.story.stories[this.storyId] && this.story.stories[this.storyId].image || null;
+    },
+  },
+  watch: {
+    '$route'() {
+      this.routeNavigation();
+    },
+  },
+  created() {
+    this.routeNavigation();
+  },
+  methods: {
+    navigateStory(id) {
+      const newId = this.storyId + id;
+      this.storyId = this.story.stories[newId] ? newId : (
+        newId < 0 ? this.story.stories.length-1 : 0
+      );
+      this.$router.push({ query: { s: this.storyId } });
+    },
+    routeNavigation() {
+      this.storyId = parseInt(this.$route.query.s) || 0;
+      this.$router.push({ query: { s: this.storyId } });
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.story {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  $target: 0;
-  $index: 10;
-  @while $index > 0 {
-    &:nth-child(#{$target}){ z-index: #{$index}; }
-    $target: $target + 1;
-    $index: $index - 1;
-  }
-}
-
-.story__background-image {
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 0; right: 0;
-  background-position: center;
-  background-size: cover;
-  animation: zoomin 120s linear;
-  animation-fill-mode: forwards;
-  z-index: -1;
+.container {
+  position: relative;
 }
 
 
-
-@keyframes zoomin {
-  0% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1.5);
-  }
-}
-
-.cta {
-  height: 100px;
-  // line-height: 100px;
-  text-align: center;
+.story__wrapper {
+  position: relative;
+  display: block;
+  height: 100vh;
+  overflow: hidden;
   background-color: #333;
-  background: linear-gradient(rgba(0, 0, 0, 0) 0, #2F2F2F 100%);
-  font-weight: 400;
-  color: #fff;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-decoration: none;
-  z-index: 20;
-
-  svg {
-    display: block;
-    margin: 10px auto 20px auto;
-  }
-}
-
-.title {
-  background-color: rgba(47, 47, 47, 0.8);
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-  font-size: 1.8em;
-  line-height: 1em;
-  text-transform: uppercase;
-  // margin: 7px;
-  min-height: 3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  // transform: translateY(-50%);
-}
-.content {
-  background-color: rgba(17, 17, 17, 0.7);
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 1em;
-  line-height: 1.2em;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  white-space: pre-line;
-}
-
-img {
-  width: 100%;
-}
-
-.story-card {
-  .cta {
-    background: linear-gradient(360deg, #6081F2 0%, rgba(0, 0, 0, 0) 100%);
-  }
+  perspective: 640px;
+  perspective-origin: 0 50%;
 }
 @media (min-width: 550px){
-  .story {
-    z-index: 2;
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #6f6f6f;
   }
-
+  .story__wrapper {
+    width: 320px;
+    height: 570px;
+    border: 1px solid #666;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .2s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
+
 </style>

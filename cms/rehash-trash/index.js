@@ -1,4 +1,9 @@
 import OurStory from './our-story';
+import RecyclingRubbish from './recycling-rubbish';
+import RenewingLives from './renewing-lives';
+import Workshops from './workshops';
+import Donate from './donate';
+import Shop from './shop';
 import Contact from './contact';
 
 export const business = {
@@ -15,6 +20,11 @@ export const stories = [
     blur: '5px',
   },
   OurStory,
+  RecyclingRubbish,
+  RenewingLives,
+  Workshops,
+  Donate,
+  Shop,
   Contact,
 ];
 

@@ -1,0 +1,47 @@
+export default {
+  name: 'donate',
+  title: 'Donate',
+  slug: 'donate',
+  h2: 'Donate',
+  image: 'images/rehash-trash/donate-1.jpeg',
+  ctaText: 'Learn More',
+  ctaLink: 'donate',
+  stories: [
+    {
+      image: 'images/rehash-trash/donate-1.jpeg',
+      blur: '2px',
+    },
+    {
+      content: 'We focus on product sales and workshops to generate income; however, your donation can assist with a whole host of holistic services that we also provide. Help to give additional empowerment to our ladies via health, well-being and personal development programs.',
+      image: 'images/rehash-trash/donate-2.jpeg',
+      blur: '2px',
+      ctaText: 'Shop Now',
+      ctaLink: '/rehash-trash/shop',
+      type: 'story-card',
+    },
+    {
+      content: 'These include supported access to medical and reproductive healthcare, dental care, and counselling services. We have regular group life-skills sessions which cover a range of topics including anger management, goal-setting, positive parenting and financial literacy. ',
+      image: 'images/rehash-trash/donate-3.jpeg',
+      blur: '2px',
+      ctaText: 'Shop Now',
+      ctaLink: '/rehash-trash/shop',
+      type: 'story-card',
+    },
+    {
+      content: 'Our women have received Khmer literacy classes, and basic conversational English lessons, which they love practicing when you visit.',
+      image: 'images/rehash-trash/donate-4.jpeg',
+      blur: '2px',
+      ctaText: 'Shop Now',
+      ctaLink: '/rehash-trash/shop',
+      type: 'story-card',
+    },
+    {
+      content: 'Additionally you can support our key sustainability goals, including transition to full Khmer management in the near future, through our management training program.',
+      image: 'images/rehash-trash/donate-5.jpeg',
+      blur: '2px',
+      ctaText: 'Shop Now',
+      ctaLink: '/rehash-trash/shop',
+      type: 'story-card',
+    },
+  ],
+};
