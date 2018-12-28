@@ -1,9 +1,11 @@
 <template>
-  <div
-    :style="{
-      backgroundImage: image ? `url('/${image}')` : null,
-    }"
-    class="background-image"/>
+  <div class="background">
+    <div
+      :style="{
+        backgroundImage: image ? `url('/${image}')` : null,
+      }"
+      class="background-image"/>
+  </div>
 </template>
 <script>
 export default {
@@ -17,6 +19,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.background {
+  background-color: #333;
+}
 .background-image {
   display: none;
 }
