@@ -1,40 +1,40 @@
 <template>
   <div
     :class="['story', story.type]">
-    <!-- <transition-group name="fade"> -->
-    <div
-      key="image"
-      :style="{
-        backgroundImage: `url(/${story.image})`,
-        filter: `blur(${story.blur})`,
-      }"
-      class="story__background-image"/>
-    <h2
-      v-if="story.title"
-      key="title"
-      class="title">
-      {{ story.h2 }}
-    </h2>
-    <div
-      v-if="story.content"
-      key="content"
-      :style="{
-        backgroundColor: story.contentBackgroundColor,
-        color: story.contentColor,
-      }"
-      class="content">
-      {{ story.content }}
-    </div>
-    <nuxt-link
-      v-if="story.ctaLink"
-      key="cta"
-      :to="story.ctaLink"
-      append
-      class="cta">
-      <fa :icon="['fas', 'chevron-up']" />
-      {{ story.ctaText }}
-    </nuxt-link>
-    <!-- </transition-group> -->
+    <transition-group name="fade">
+      <div
+        key="image"
+        :style="{
+          backgroundImage: `url(/${story.image})`,
+          filter: `blur(${story.blur})`,
+        }"
+        class="story__background-image"/>
+      <h2
+        v-if="story.title"
+        key="title"
+        class="title">
+        {{ story.h2 }}
+      </h2>
+      <div
+        v-if="story.content"
+        key="content"
+        :style="{
+          backgroundColor: story.contentBackgroundColor,
+          color: story.contentColor,
+        }"
+        class="content">
+        {{ story.content }}
+      </div>
+      <nuxt-link
+        v-if="story.ctaLink"
+        key="cta"
+        :to="story.ctaLink"
+        append
+        class="cta">
+        <fa :icon="['fas', 'chevron-up']" />
+        {{ story.ctaText }}
+      </nuxt-link>
+    </transition-group>
   </div>
 </template>
 <script>
