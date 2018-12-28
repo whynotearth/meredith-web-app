@@ -4,7 +4,7 @@
       :length="length"
       :story-id="storyId"/>
     <section class="content__wrapper">
-      <nuxt-link :to="`/${home}?s=0`">
+      <nuxt-link :to="`/${home}`">
         <img
           :src="`/${logo}`"
           :alt="title"

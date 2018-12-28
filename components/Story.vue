@@ -14,14 +14,12 @@
         :logo="logo"
         :home="home"/>
 
-      <transition-group name="fade">
-        <card
-          v-for="(item, i) in story.stories"
-          v-show="i === storyId || i === storyId+1"
-          :key="`story_${i}`"
-          :story="item"
-        />
-      </transition-group>
+      <card
+        v-for="(item, i) in story.stories"
+        v-show="i === storyId || i === storyId+1"
+        :key="`story_${i}`"
+        :story="item"
+      />
 
       <bookend
         key="bookend"
@@ -63,25 +61,12 @@ export default {
       return this.story.stories[this.storyId] && this.story.stories[this.storyId].image || null;
     },
   },
-  watch: {
-    '$route'() {
-      this.routeNavigation();
-    },
-  },
-  created() {
-    this.routeNavigation();
-  },
   methods: {
     navigateStory(id) {
       const newId = this.storyId + id;
       this.storyId = this.story.stories[newId] ? newId : (
         newId < 0 ? this.story.stories.length-1 : 0
       );
-      this.$router.push({ query: { s: this.storyId } });
-    },
-    routeNavigation() {
-      this.storyId = parseInt(this.$route.query.s) || 0;
-      this.$router.push({ query: { s: this.storyId } });
     },
   },
 }
