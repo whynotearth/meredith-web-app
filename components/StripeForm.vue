@@ -1,15 +1,111 @@
 <template>
-  <div ref="card"/>
+  <div
+    id="example-5"
+    class="cell example example5">
+    <form
+      id="payment-form"
+      @submit.prevent="onSubmit">
+      <fieldset>
+        <legend
+          class="card-only"
+          data-tid="elements_examples.form.pay_with_card">Pay with card</legend>
+
+        <div class="row">
+          <div class="field">
+            <label
+              for="example5-address" 
+              data-tid="elements_examples.form.address_label">Address</label>
+            <input
+              id="example5-address"
+              data-tid="elements_examples.form.address_placeholder"
+              class="input"
+              type="text"
+              placeholder="185 Berry St"
+              required
+              autocomplete="address-line1"
+            >
+          </div>
+        </div>
+
+        <div
+          class="row"
+          data-locale-reversible>
+          <div class="field">
+            <label
+              for="example5-city" 
+              data-tid="elements_examples.form.city_label">City</label>
+            <input
+              id="example5-city"
+              data-tid="elements_examples.form.city_placeholder"
+              class="input"
+              type="text"
+              placeholder="San Francisco"
+              required
+              autocomplete="address-level2"
+            >
+          </div>
+          <div class="field">
+            <label
+              for="example5-state" 
+              data-tid="elements_examples.form.state_label">State</label>
+            <input
+              id="example5-state"
+              data-tid="elements_examples.form.state_placeholder"
+              class="input empty"
+              type="text"
+              placeholder="CA"
+              required
+              autocomplete="address-level1"
+            >
+          </div>
+          <div class="field">
+            <label
+              for="example5-zip"
+              data-tid="elements_examples.form.postal_code_label">ZIP</label>
+            <input
+              id="example5-zip"
+              data-tid="elements_examples.form.postal_code_placeholder"
+              class="input empty"
+              type="text"
+              placeholder="94107"
+              required
+              autocomplete="postal-code"
+            >
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label
+              for="example5-card" 
+              data-tid="elements_examples.form.card_label">Card</label>
+            <div
+              ref="card"
+              class="input"/>
+          </div>
+        </div>
+        <button
+          type="submit"
+          data-tid="elements_examples.form.pay_button">Pay $25</button>
+      </fieldset>
+    </form>
+  </div>
 </template>
 
 <script>
+const testStripeKey = "pk_test_Hl82FbuXgZzrCxpyY4h9ilJl";
 export default {
-  mounted: function () {
-    const stripe = Stripe(`YOUR_STRIPE_PUBLISHABLE_KEY`);
+  mounted: function() {
+    const stripe = Stripe(testStripeKey);
     const elements = stripe.elements();
 
-    const card = elements.create('card');
+    const card = elements.create("card");
     card.mount(this.$refs.card);
+  },
+  methods: {
+    onSubmit: function() {
+      console.log("submitting");
+    }
   }
 };
 </script>
@@ -17,5 +113,208 @@ export default {
 <style lang="scss" scoped>
 .container {
   position: relative;
+}
+.StripeElement {
+  background-color: white;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+.example.example5 {
+  background-color: #9169d8;
+}
+
+.example.example5 * {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+#example5-paymentRequest {
+  max-width: 500px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.example.example5 fieldset {
+  border: 1px solid #b5a4ed;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.example.example5 fieldset legend {
+  margin: 0 auto;
+  padding: 0 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #cdd0f8;
+  background-color: #9169d8;
+}
+
+.example.example5 fieldset legend + * {
+  clear: both;
+}
+
+.example.example5 .card-only {
+  display: block;
+}
+.example.example5 .payment-request-available {
+  display: none;
+}
+
+.example.example5 .row {
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 0 10px;
+}
+
+.example.example5 .field {
+  position: relative;
+  width: 100%;
+}
+
+.example.example5 .field + .field {
+  margin-left: 10px;
+}
+
+.example.example5 label {
+  width: 100%;
+  color: #cdd0f8;
+  font-size: 13px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.example.example5 .input {
+  width: 100%;
+  color: #fff;
+  background: transparent;
+  padding: 5px 0 6px 0;
+  border-bottom: 1px solid #a988ec;
+  transition: border-color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.example.example5 .input::-webkit-input-placeholder {
+  color: #bfaef6;
+}
+
+.example.example5 .input::-moz-placeholder {
+  color: #bfaef6;
+}
+
+.example.example5 .input:-ms-input-placeholder {
+  color: #bfaef6;
+}
+
+.example.example5 .input.StripeElement--focus,
+.example.example5 .input:focus {
+  border-color: #fff;
+}
+.example.example5 .input.StripeElement--invalid {
+  border-color: #ffc7ee;
+}
+
+.example.example5 input:-webkit-autofill,
+.example.example5 select:-webkit-autofill {
+  -webkit-text-fill-color: #fce883;
+  transition: background-color 100000000s;
+  animation: 1ms void-animation-out;
+  -webkit-animation: 1ms void-animation-out;
+}
+
+.example.example5 .StripeElement--webkit-autofill {
+  background: transparent !important;
+}
+
+.example.example5 input,
+.example.example5 button,
+.example.example5 select {
+  animation: 1ms void-animation-out;
+  -webkit-animation: 1ms void-animation-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border-style: none;
+  border-radius: 0;
+}
+
+.example.example5 select.input,
+.example.example5 select:-webkit-autofill {
+  background-image: url('data:image/svg+xml;utf8,<svg width="10px" height="5px" viewBox="0 0 10 5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#fff" d="M5.35355339,4.64644661 L9.14644661,0.853553391 L9.14644661,0.853553391 C9.34170876,0.658291245 9.34170876,0.341708755 9.14644661,0.146446609 C9.05267842,0.0526784202 8.92550146,-2.43597394e-17 8.79289322,0 L1.20710678,0 L1.20710678,0 C0.930964406,5.07265313e-17 0.707106781,0.223857625 0.707106781,0.5 C0.707106781,0.632608245 0.759785201,0.759785201 0.853553391,0.853553391 L4.64644661,4.64644661 L4.64644661,4.64644661 C4.84170876,4.84170876 5.15829124,4.84170876 5.35355339,4.64644661 Z" id="shape"></path></svg>');
+  background-position: 100%;
+  background-size: 10px 5px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 20px;
+}
+
+.example.example5 button {
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin: 20px 0 0;
+  background-color: #fff;
+  border-radius: 6px;
+  color: #9169d8;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.example.example5 button:active {
+  background-color: #cdd0f8;
+}
+
+.example.example5 .error svg .base {
+  fill: #fff;
+}
+
+.example.example5 .error svg .glyph {
+  fill: #9169d8;
+}
+
+.example.example5 .error .message {
+  color: #fff;
+}
+
+.example.example5 .success .icon .border {
+  stroke: #bfaef6;
+}
+
+.example.example5 .success .icon .checkmark {
+  stroke: #fff;
+}
+
+.example.example5 .success .title {
+  color: #fff;
+}
+
+.example.example5 .success .message {
+  color: #cdd0f8;
+}
+
+.example.example5 .success .reset path {
+  fill: #fff;
 }
 </style>
