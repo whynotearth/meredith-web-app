@@ -133,7 +133,7 @@
         </div>
         <button
           type="submit"
-          data-tid="elements_examples.form.pay_button">Pay $25</button>
+          data-tid="elements_examples.form.pay_button">Donate $5</button>
       </fieldset>
     </form>
   </div>
