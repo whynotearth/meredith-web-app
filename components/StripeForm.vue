@@ -13,6 +13,22 @@
         <div class="row">
           <div class="field">
             <label
+              for="example5-name" 
+              data-tid="elements_examples.form.name_label">Name</label>
+            <input
+              id="example5-name"
+              data-tid="elements_examples.form.name_placeholder"
+              class="input"
+              type="text"
+              placeholder="Jane Doe"
+              required
+              autocomplete="name">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label
               for="example5-email" 
               data-tid="elements_examples.form.email_label">Email</label>
             <input
