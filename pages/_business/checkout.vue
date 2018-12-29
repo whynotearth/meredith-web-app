@@ -2,29 +2,19 @@
   <div
     class="container">
     <section class="card__wrapper">
-      <div ref="card"/>
+      <stripe-form />
     </section>
   </div>
 </template>
 
 <script>
+import StripeForm from '@/components/StripeForm'
 export default {
-  mounted: function () {
-    const stripe = Stripe(`YOUR_STRIPE_PUBLISHABLE_KEY`);
-    const elements = stripe.elements();
-
-    const card = elements.create('card');
-    card.mount(this.$refs.card);
-  }
+  components: { StripeForm }
 };
 </script>
 
 <style lang="scss" scoped>
-.container {
-  position: relative;
-}
-
-
 .card__wrapper {
   position: relative;
   display: block;
