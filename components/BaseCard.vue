@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <div
-      :style="content.style"
+      :style="attributes.style"
       class="card__wrapper"
     >
-      <header v-if="content.title">
-        {{ content.title }}
+      <header v-if="attributes.title">
+        {{ attributes.title }}
       </header>
       <main>
         <slot />
@@ -19,7 +19,7 @@
 export default {
   name: "BaseCard",
   props: {
-    content: {
+    attributes: {
       type: Object,
       default: () => {}
     }
