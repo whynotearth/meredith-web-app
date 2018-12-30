@@ -84,7 +84,7 @@
                 data-tid="stripe_elements.form.city_placeholder"
                 class="input"
                 type="text"
-                placeholder="San Francisco"
+                placeholder="Sieam Reap"
                 required
                 autocomplete="address-level2"
               >
@@ -112,7 +112,7 @@
                 data-tid="stripe_elements.form.postal_code_placeholder"
                 class="input empty"
                 type="text"
-                placeholder="94107"
+                placeholder="17255"
                 required
                 autocomplete="postal-code"
               >
@@ -197,22 +197,14 @@ export default {
     });
 
     var paymentRequest = stripe.paymentRequest({
-    country: "US",
-    currency: "usd",
-    total: {
-      amount: 2500,
-      label: "Total"
-    },
-    requestShipping: true,
-    shippingOptions: [
-      {
-        id: "free-shipping",
-        label: "Free shipping",
-        detail: "Arrives in 5 to 7 days",
-        amount: 0
-      }
-    ]
-  });
+      country: "US",
+      currency: "usd",
+      total: {
+        amount: 500,
+        label: "Total"
+      },
+    });
+
   paymentRequest.on("token", function(result) {
     var example = document.querySelector(".stripe");
     example.querySelector(".token").innerText = result.token.id;
@@ -263,11 +255,13 @@ export default {
   }
 
   registerElements([card], "stripe");
+
   },
   methods: {
     onSubmit: async function() {
       try {
         const token = await this.createToken(this.card)
+        // TODO: post to server here, use all form fields
       } catch(e) {
         console.error(e)
       }
@@ -275,6 +269,7 @@ export default {
     createToken: async function (card) {
       try {
         const result = await this.stripe.createToken(card)
+        if (result.error) throw result.error
         return result.token
       } catch(e) {
         const errorElement = document.getElementById('card-errors');
