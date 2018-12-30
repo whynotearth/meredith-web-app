@@ -1,26 +1,25 @@
 <template>
   <div
-    id="example-5"
-    class="cell example example5">
+    class="cell stripe-wrapper stripe">
     <form
       id="payment-form"
       @submit.prevent="onSubmit">
-      <div id="example5-paymentRequest">
+      <div id="stripe-paymentRequest">
         <!--Stripe paymentRequestButton Element inserted here-->
       </div>
       <fieldset>
         <legend
           class="card-only"
-          data-tid="elements_examples.form.pay_with_card">Pay with card</legend>
+          data-tid="stripe_elements.form.pay_with_card">Pay with card</legend>
 
         <div class="row">
           <div class="field">
             <label
-              for="example5-name" 
-              data-tid="elements_examples.form.name_label">Name</label>
+              for="stripe-name" 
+              data-tid="stripe_elements.form.name_label">Name</label>
             <input
-              id="example5-name"
-              data-tid="elements_examples.form.name_placeholder"
+              id="stripe-name"
+              data-tid="stripe_elements.form.name_placeholder"
               class="input"
               type="text"
               placeholder="Jane Doe"
@@ -32,11 +31,11 @@
         <div class="row">
           <div class="field">
             <label
-              for="example5-email" 
-              data-tid="elements_examples.form.email_label">Email</label>
+              for="stripe-email" 
+              data-tid="stripe_elements.form.email_label">Email</label>
             <input
-              id="example5-email"
-              data-tid="elements_examples.form.email_placeholder"
+              id="stripe-email"
+              data-tid="stripe_elements.form.email_placeholder"
               class="input"
               type="text"
               placeholder="janedoe@gmail.com"
@@ -45,11 +44,11 @@
           </div>
           <div class="field">
             <label
-              for="example5-phone" 
-              data-tid="elements_examples.form.phone_label">Phone</label>
+              for="stripe-phone" 
+              data-tid="stripe_elements.form.phone_label">Phone</label>
             <input
-              id="example5-phone"
-              data-tid="elements_examples.form.phone_placeholder"
+              id="stripe-phone"
+              data-tid="stripe_elements.form.phone_placeholder"
               class="input"
               type="text"
               placeholder="(941) 555-0123"
@@ -62,11 +61,11 @@
           <div class="row">
             <div class="field">
               <label
-                for="example5-address" 
-                data-tid="elements_examples.form.address_label">Address</label>
+                for="stripe-address" 
+                data-tid="stripe_elements.form.address_label">Address</label>
               <input
-                id="example5-address"
-                data-tid="elements_examples.form.address_placeholder"
+                id="stripe-address"
+                data-tid="stripe_elements.form.address_placeholder"
                 class="input"
                 type="text"
                 placeholder="185 Berry St"
@@ -81,11 +80,11 @@
             data-locale-reversible>
             <div class="field">
               <label
-                for="example5-city" 
-                data-tid="elements_examples.form.city_label">City</label>
+                for="stripe-city" 
+                data-tid="stripe_elements.form.city_label">City</label>
               <input
-                id="example5-city"
-                data-tid="elements_examples.form.city_placeholder"
+                id="stripe-city"
+                data-tid="stripe_elements.form.city_placeholder"
                 class="input"
                 type="text"
                 placeholder="San Francisco"
@@ -95,11 +94,11 @@
             </div>
             <div class="field">
               <label
-                for="example5-state" 
-                data-tid="elements_examples.form.state_label">State</label>
+                for="stripe-state" 
+                data-tid="stripe_elements.form.state_label">State</label>
               <input
-                id="example5-state"
-                data-tid="elements_examples.form.state_placeholder"
+                id="stripe-state"
+                data-tid="stripe_elements.form.state_placeholder"
                 class="input empty"
                 type="text"
                 placeholder="CA"
@@ -109,11 +108,11 @@
             </div>
             <div class="field">
               <label
-                for="example5-zip"
-                data-tid="elements_examples.form.postal_code_label">ZIP</label>
+                for="stripe-zip"
+                data-tid="stripe_elements.form.postal_code_label">ZIP</label>
               <input
-                id="example5-zip"
-                data-tid="elements_examples.form.postal_code_placeholder"
+                id="stripe-zip"
+                data-tid="stripe_elements.form.postal_code_placeholder"
                 class="input empty"
                 type="text"
                 placeholder="94107"
@@ -127,8 +126,8 @@
         <div class="row">
           <div class="field">
             <label
-              for="example5-card" 
-              data-tid="elements_examples.form.card_label">Card</label>
+              for="stripe-card" 
+              data-tid="stripe_elements.form.card_label">Card</label>
             <div
               ref="card"
               class="input"/>
@@ -139,7 +138,7 @@
           role="alert" />
         <button
           type="submit"
-          data-tid="elements_examples.form.pay_button">Donate $5</button>
+          data-tid="stripe_elements.form.pay_button">Donate $5</button>
       </fieldset>
     </form>
   </div>
@@ -198,7 +197,7 @@ export default {
     ]
   });
   paymentRequest.on("token", function(result) {
-    var example = document.querySelector(".example5");
+    var example = document.querySelector(".stripe");
     example.querySelector(".token").innerText = result.token.id;
     example.classList.add("submitted");
     result.complete("success");
@@ -215,12 +214,12 @@ export default {
 
   paymentRequest.canMakePayment().then(function(result) {
     if (result) {
-      document.querySelector(".example5 .card-only").style.display = "none";
+      document.querySelector(".stripe .card-only").style.display = "none";
       document.querySelector(
-        ".example5 .payment-request-available"
+        ".stripe .payment-request-available"
       ).style.display =
         "block";
-      paymentRequestElement.mount("#example5-paymentRequest");
+      paymentRequestElement.mount("#stripe-paymentRequest");
     }
   });
 
@@ -246,7 +245,7 @@ export default {
     }
   }
 
-  registerElements([card], "example5");
+  registerElements([card], "stripe");
   },
   methods: {
     onSubmit: function() {
@@ -261,29 +260,29 @@ export default {
   position: relative;
 }
 
-.example.example5 {
+.stripe-wrapper.stripe {
   background-color: #9169d8;
 }
 
-.example.example5 * {
+.stripe-wrapper.stripe * {
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 0.98em; // TODO: find out why this has to be so weird
   font-weight: 400;
 }
 
-#example5-paymentRequest {
+#stripe-paymentRequest {
   max-width: 500px;
   width: 100%;
   margin-bottom: 10px;
 }
 
-.example.example5 fieldset {
+.stripe-wrapper.stripe fieldset {
   border: 1px solid #b5a4ed;
   padding: 15px;
   border-radius: 6px;
 }
 
-.example.example5 fieldset legend {
+.stripe-wrapper.stripe fieldset legend {
   margin: 0 auto;
   margin-right: 40%;
   padding: 0 10px;
@@ -294,33 +293,33 @@ export default {
   background-color: #9169d8;
 }
 
-.example.example5 fieldset legend + * {
+.stripe-wrapper.stripe fieldset legend + * {
   clear: both;
 }
 
-.example.example5 .card-only {
+.stripe-wrapper.stripe .card-only {
   display: block;
 }
-.example.example5 .payment-request-available {
+.stripe-wrapper.stripe .payment-request-available {
   display: none;
 }
 
-.example.example5 .row {
+.stripe-wrapper.stripe .row {
   display: -ms-flexbox;
   display: flex;
   margin: 0 0 10px;
 }
 
-.example.example5 .field {
+.stripe-wrapper.stripe .field {
   position: relative;
   width: 100%;
 }
 
-.example.example5 .field + .field {
+.stripe-wrapper.stripe .field + .field {
   margin-left: 10px;
 }
 
-.example.example5 label {
+.stripe-wrapper.stripe label {
   width: 100%;
   color: #cdd0f8;
   font-size: 13px;
@@ -330,7 +329,7 @@ export default {
   white-space: nowrap;
 }
 
-.example.example5 .input {
+.stripe-wrapper.stripe .input {
   width: 100%;
   color: #fff;
   background: transparent;
@@ -339,41 +338,41 @@ export default {
   transition: border-color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.example.example5 .input::-webkit-input-placeholder {
+.stripe-wrapper.stripe .input::-webkit-input-placeholder {
   color: #bfaef6;
 }
 
-.example.example5 .input::-moz-placeholder {
+.stripe-wrapper.stripe .input::-moz-placeholder {
   color: #bfaef6;
 }
 
-.example.example5 .input:-ms-input-placeholder {
+.stripe-wrapper.stripe .input:-ms-input-placeholder {
   color: #bfaef6;
 }
 
-.example.example5 .input.StripeElement--focus,
-.example.example5 .input:focus {
+.stripe-wrapper.stripe .input.StripeElement--focus,
+.stripe-wrapper.stripe .input:focus {
   border-color: #fff;
 }
-.example.example5 .input.StripeElement--invalid {
+.stripe-wrapper.stripe .input.StripeElement--invalid {
   border-color: #ffc7ee;
 }
 
-.example.example5 input:-webkit-autofill,
-.example.example5 select:-webkit-autofill {
+.stripe-wrapper.stripe input:-webkit-autofill,
+.stripe-wrapper.stripe select:-webkit-autofill {
   -webkit-text-fill-color: #fce883;
   transition: background-color 100000000s;
   animation: 1ms void-animation-out;
   -webkit-animation: 1ms void-animation-out;
 }
 
-.example.example5 .StripeElement--webkit-autofill {
+.stripe-wrapper.stripe .StripeElement--webkit-autofill {
   background: transparent !important;
 }
 
-.example.example5 input,
-.example.example5 button,
-.example.example5 select {
+.stripe-wrapper.stripe input,
+.stripe-wrapper.stripe button,
+.stripe-wrapper.stripe select {
   animation: 1ms void-animation-out;
   -webkit-animation: 1ms void-animation-out;
   -webkit-appearance: none;
@@ -384,8 +383,8 @@ export default {
   border-radius: 0;
 }
 
-.example.example5 select.input,
-.example.example5 select:-webkit-autofill {
+.stripe-wrapper.stripe select.input,
+.stripe-wrapper.stripe select:-webkit-autofill {
   background-image: url('data:image/svg+xml;utf8,<svg width="10px" height="5px" viewBox="0 0 10 5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#fff" d="M5.35355339,4.64644661 L9.14644661,0.853553391 L9.14644661,0.853553391 C9.34170876,0.658291245 9.34170876,0.341708755 9.14644661,0.146446609 C9.05267842,0.0526784202 8.92550146,-2.43597394e-17 8.79289322,0 L1.20710678,0 L1.20710678,0 C0.930964406,5.07265313e-17 0.707106781,0.223857625 0.707106781,0.5 C0.707106781,0.632608245 0.759785201,0.759785201 0.853553391,0.853553391 L4.64644661,4.64644661 L4.64644661,4.64644661 C4.84170876,4.84170876 5.15829124,4.84170876 5.35355339,4.64644661 Z" id="shape"></path></svg>');
   background-position: 100%;
   background-size: 10px 5px;
@@ -395,7 +394,7 @@ export default {
   padding-right: 20px;
 }
 
-.example.example5 button {
+.stripe-wrapper.stripe button {
   display: block;
   width: 100%;
   height: 40px;
@@ -407,39 +406,39 @@ export default {
   cursor: pointer;
 }
 
-.example.example5 button:active {
+.stripe-wrapper.stripe button:active {
   background-color: #cdd0f8;
 }
 
-.example.example5 .error svg .base {
+.stripe-wrapper.stripe .error svg .base {
   fill: #fff;
 }
 
-.example.example5 .error svg .glyph {
+.stripe-wrapper.stripe .error svg .glyph {
   fill: #9169d8;
 }
 
-.example.example5 .error .message {
+.stripe-wrapper.stripe .error .message {
   color: #fff;
 }
 
-.example.example5 .success .icon .border {
+.stripe-wrapper.stripe .success .icon .border {
   stroke: #bfaef6;
 }
 
-.example.example5 .success .icon .checkmark {
+.stripe-wrapper.stripe .success .icon .checkmark {
   stroke: #fff;
 }
 
-.example.example5 .success .title {
+.stripe-wrapper.stripe .success .title {
   color: #fff;
 }
 
-.example.example5 .success .message {
+.stripe-wrapper.stripe .success .message {
   color: #cdd0f8;
 }
 
-.example.example5 .success .reset path {
+.stripe-wrapper.stripe .success .reset path {
   fill: #fff;
 }
 </style>
