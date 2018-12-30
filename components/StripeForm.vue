@@ -137,7 +137,7 @@
           type="submit"
           data-tid="stripe_elements.form.pay_button">Donate $5</button>
         <div id="stripe-paymentRequest">
-          <!--Stripe paymentRequestButton Element inserted here-->
+          <!--Stripe paymentRequestButton Element inserted here when available-->
         </div>
       </fieldset>
     </form>
@@ -145,8 +145,9 @@
 </template>
 
 <script>
-const testStripeKey = "pk_test_Hl82FbuXgZzrCxpyY4h9ilJl";
-const stripeStyle = {
+import config from '@/config'
+const cardElementConfig = {
+  hidePostalCode: true,
   iconStyle: "solid",
   style: {
     base: {
@@ -172,12 +173,28 @@ const stripeStyle = {
 }
 
 export default {
+  data: () => ({
+    stripe: null,
+    card: null
+  }),
   mounted: function() {
-    const stripe = Stripe(testStripeKey);
+    const stripe = Stripe(config.testStripeKey);
+    this.stripe = stripe;
     const elements = stripe.elements();
 
-    const card = elements.create("card", stripeStyle);
+    const card = elements.create("card", cardElementConfig);
+    this.card = card;
     card.mount(this.$refs.card);
+
+    // listen to errors and display in DOM if any
+    card.addEventListener('change', ({ error }) => {
+      const displayError = document.getElementById('card-errors');
+      if (error) {
+        displayError.textContent = error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
 
     var paymentRequest = stripe.paymentRequest({
     country: "US",
@@ -248,8 +265,21 @@ export default {
   registerElements([card], "stripe");
   },
   methods: {
-    onSubmit: function() {
-      console.log("submitting");
+    onSubmit: async function() {
+      try {
+        const token = await this.createToken(this.card)
+      } catch(e) {
+        console.error(e)
+      }
+    },
+    createToken: async function (card) {
+      try {
+        const result = await this.stripe.createToken(card)
+        return result.token
+      } catch(e) {
+        const errorElement = document.getElementById('card-errors');
+        errorElement.textContent = e.message;
+      }
     }
   }
 };
