@@ -141,12 +141,37 @@
 
 <script>
 const testStripeKey = "pk_test_Hl82FbuXgZzrCxpyY4h9ilJl";
+const stripeStyle = {
+  iconStyle: "solid",
+  style: {
+    base: {
+      iconColor: "#fff",
+      color: "#fff",
+      fontWeight: 400,
+      fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+      fontSize: "1em",
+      fontSmoothing: "antialiased",
+
+      "::placeholder": {
+        color: "#BFAEF6"
+      },
+      ":-webkit-autofill": {
+        color: "#fce883"
+      }
+    },
+    invalid: {
+      iconColor: "#FFC7EE",
+      color: "#FFC7EE"
+    }
+  }
+}
+
 export default {
   mounted: function() {
     const stripe = Stripe(testStripeKey);
     const elements = stripe.elements();
 
-    const card = elements.create("card");
+    const card = elements.create("card", stripeStyle);
     card.mount(this.$refs.card);
   },
   methods: {
@@ -168,7 +193,7 @@ export default {
 
 .example.example5 * {
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 0.98em; // TODO: find out why this has to be so weird
   font-weight: 400;
 }
 
@@ -186,6 +211,7 @@ export default {
 
 .example.example5 fieldset legend {
   margin: 0 auto;
+  margin-right: 40%;
   padding: 0 10px;
   text-align: center;
   font-size: 14px;
