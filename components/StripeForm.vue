@@ -4,9 +4,6 @@
     <form
       id="payment-form"
       @submit.prevent="onSubmit">
-      <div id="stripe-paymentRequest">
-        <!--Stripe paymentRequestButton Element inserted here-->
-      </div>
       <fieldset>
         <legend
           class="card-only"
@@ -139,6 +136,9 @@
         <button
           type="submit"
           data-tid="stripe_elements.form.pay_button">Donate $5</button>
+        <div id="stripe-paymentRequest">
+          <!--Stripe paymentRequestButton Element inserted here-->
+        </div>
       </fieldset>
     </form>
   </div>
