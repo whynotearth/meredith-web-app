@@ -175,7 +175,8 @@ const cardElementConfig = {
 export default {
   data: () => ({
     stripe: null,
-    card: null
+    card: null,
+    amount: 5.0
   }),
   mounted: function() {
     const stripe = Stripe(config.testStripeKey);
