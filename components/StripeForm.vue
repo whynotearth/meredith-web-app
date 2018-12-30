@@ -84,7 +84,7 @@
                 data-tid="stripe_elements.form.city_placeholder"
                 class="input"
                 type="text"
-                placeholder="Sieam Reap"
+                placeholder="San Francisco"
                 required
                 autocomplete="address-level2"
               >
@@ -112,7 +112,7 @@
                 data-tid="stripe_elements.form.postal_code_placeholder"
                 class="input empty"
                 type="text"
-                placeholder="17255"
+                placeholder="94107"
                 required
                 autocomplete="postal-code"
               >
@@ -282,12 +282,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary-color: #17304A;
+$secondary-color: #fbfbfb;
+
 .container {
   position: relative;
-}
-
-.stripe-wrapper.stripe {
-  background-color: #9169d8;
 }
 
 .stripe-wrapper.stripe * {
@@ -315,8 +314,8 @@ export default {
   text-align: center;
   font-size: 14px;
   font-weight: 500;
-  color: #cdd0f8;
-  background-color: #9169d8;
+  color: $secondary-color;
+  background-color: $primary-color;
 }
 
 .stripe-wrapper.stripe fieldset legend + * {
@@ -347,7 +346,7 @@ export default {
 
 .stripe-wrapper.stripe label {
   width: 100%;
-  color: #cdd0f8;
+  color: $secondary-color;
   font-size: 13px;
   font-weight: 500;
   overflow: hidden;
@@ -425,15 +424,15 @@ export default {
   width: 100%;
   height: 40px;
   margin: 20px 0 0;
-  background-color: #fff;
+  background-color: $secondary-color;
   border-radius: 6px;
-  color: #9169d8;
+  color: $primary-color;
   font-weight: 500;
   cursor: pointer;
 }
 
 .stripe-wrapper.stripe button:active {
-  background-color: #cdd0f8;
+  background-color: $secondary-color;
 }
 
 .stripe-wrapper.stripe .error svg .base {
@@ -441,7 +440,7 @@ export default {
 }
 
 .stripe-wrapper.stripe .error svg .glyph {
-  fill: #9169d8;
+  fill: $primary-color;
 }
 
 .stripe-wrapper.stripe .error .message {
@@ -461,7 +460,7 @@ export default {
 }
 
 .stripe-wrapper.stripe .success .message {
-  color: #cdd0f8;
+  color: $secondary-color;
 }
 
 .stripe-wrapper.stripe .success .reset path {

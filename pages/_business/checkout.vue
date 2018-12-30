@@ -18,8 +18,8 @@ export default {
         name: 'Checkout',
         title: 'Stripe checkout form',
         style: {
-          backgroundColor: "#9169d8",
-          color: "#ffffff"
+          backgroundColor: "#17304A",
+          color: "#FBFBFB"
         }
       }
     }
