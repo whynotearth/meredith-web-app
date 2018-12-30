@@ -5,6 +5,9 @@
     <form
       id="payment-form"
       @submit.prevent="onSubmit">
+      <div id="example5-paymentRequest">
+        <!--Stripe paymentRequestButton Element inserted here-->
+      </div>
       <fieldset>
         <legend
           class="card-only"
@@ -131,6 +134,9 @@
               class="input"/>
           </div>
         </div>
+        <div
+          id="card-errors"
+          role="alert" />
         <button
           type="submit"
           data-tid="elements_examples.form.pay_button">Donate $5</button>
@@ -173,6 +179,74 @@ export default {
 
     const card = elements.create("card", stripeStyle);
     card.mount(this.$refs.card);
+
+    var paymentRequest = stripe.paymentRequest({
+    country: "US",
+    currency: "usd",
+    total: {
+      amount: 2500,
+      label: "Total"
+    },
+    requestShipping: true,
+    shippingOptions: [
+      {
+        id: "free-shipping",
+        label: "Free shipping",
+        detail: "Arrives in 5 to 7 days",
+        amount: 0
+      }
+    ]
+  });
+  paymentRequest.on("token", function(result) {
+    var example = document.querySelector(".example5");
+    example.querySelector(".token").innerText = result.token.id;
+    example.classList.add("submitted");
+    result.complete("success");
+  });
+
+  var paymentRequestElement = elements.create("paymentRequestButton", {
+    paymentRequest: paymentRequest,
+    style: {
+      paymentRequestButton: {
+        theme: "light"
+      }
+    }
+  });
+
+  paymentRequest.canMakePayment().then(function(result) {
+    if (result) {
+      document.querySelector(".example5 .card-only").style.display = "none";
+      document.querySelector(
+        ".example5 .payment-request-available"
+      ).style.display =
+        "block";
+      paymentRequestElement.mount("#example5-paymentRequest");
+    }
+  });
+
+  function registerElements(elements, exampleName) {
+    var formClass = '.' + exampleName;
+    var example = document.querySelector(formClass);
+
+    var form = example.querySelector('form');
+    var resetButton = example.querySelector('a.reset');
+    // TODO: resolve below
+    // var error = form.querySelector('.error');
+    // var errorMessage = error.querySelector('.message');
+
+    function enableInputs() {
+      Array.prototype.forEach.call(
+        form.querySelectorAll(
+          "input[type='text'], input[type='email'], input[type='tel']"
+        ),
+        function(input) {
+          input.removeAttribute('disabled');
+        }
+      );
+    }
+  }
+
+  registerElements([card], "example5");
   },
   methods: {
     onSubmit: function() {
