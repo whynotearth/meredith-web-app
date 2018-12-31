@@ -1,1 +1,1 @@
-export const meredithApi = require('./meredithApi').defaultp
+export const meredithApi = require('./meredithApi').default
