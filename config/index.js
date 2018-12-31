@@ -1,3 +1,3 @@
 export default {
-  testStripeKey: "pk_test_Hl82FbuXgZzrCxpyY4h9ilJl"
+  TEST_STRIPE_KEY: "pk_test_Hl82FbuXgZzrCxpyY4h9ilJl",
 }
