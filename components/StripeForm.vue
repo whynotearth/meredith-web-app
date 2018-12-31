@@ -176,7 +176,8 @@ export default {
   data: () => ({
     stripe: null,
     card: null,
-    amount: 5.0
+    amount: 5.0,
+    appStatus: this.$machineStates.IDLE
   }),
   mounted: function() {
     const stripe = Stripe(config.TEST_STRIPE_KEY);
@@ -262,7 +263,9 @@ export default {
     onSubmit: async function() {
       try {
         const token = await this.createToken(this.card)
-        // TODO: post to server here, use all form fields
+        // this.appStatus = this.$machineStates.LOADING
+        // TODO: await postTransaction(payload)
+        // this.appStatus. this.$machineState.SUCCESS
       } catch(e) {
         console.error(e)
       }
@@ -276,6 +279,9 @@ export default {
         const errorElement = document.getElementById('card-errors');
         errorElement.textContent = e.message;
       }
+    },
+    postTransaction: function () {
+      // TODO
     }
   }
 };
