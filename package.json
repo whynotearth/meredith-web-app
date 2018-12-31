@@ -18,6 +18,7 @@
     "@nuxtjs/axios": "^5.0.0",
     "@nuxtjs/font-awesome": "^1.0.3",
     "@nuxtjs/pwa": "^2.6.0",
+    "axios": "^0.18.0",
     "cross-env": "^5.2.0",
     "nuxt": "^2.2.0",
     "nuxt-fontawesome": "^0.3.0"

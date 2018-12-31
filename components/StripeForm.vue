@@ -12,7 +12,7 @@
         <div class="row">
           <div class="field">
             <label
-              for="stripe-name" 
+              for="stripe-name"
               data-tid="stripe_elements.form.name_label">Name</label>
             <input
               id="stripe-name"
@@ -28,7 +28,7 @@
         <div class="row">
           <div class="field">
             <label
-              for="stripe-email" 
+              for="stripe-email"
               data-tid="stripe_elements.form.email_label">Email</label>
             <input
               id="stripe-email"
@@ -41,7 +41,7 @@
           </div>
           <div class="field">
             <label
-              for="stripe-phone" 
+              for="stripe-phone"
               data-tid="stripe_elements.form.phone_label">Phone</label>
             <input
               id="stripe-phone"
@@ -58,7 +58,7 @@
           <div class="row">
             <div class="field">
               <label
-                for="stripe-address" 
+                for="stripe-address"
                 data-tid="stripe_elements.form.address_label">Address</label>
               <input
                 id="stripe-address"
@@ -77,7 +77,7 @@
             data-locale-reversible>
             <div class="field">
               <label
-                for="stripe-city" 
+                for="stripe-city"
                 data-tid="stripe_elements.form.city_label">City</label>
               <input
                 id="stripe-city"
@@ -91,7 +91,7 @@
             </div>
             <div class="field">
               <label
-                for="stripe-state" 
+                for="stripe-state"
                 data-tid="stripe_elements.form.state_label">State</label>
               <input
                 id="stripe-state"
@@ -123,7 +123,7 @@
         <div class="row">
           <div class="field">
             <label
-              for="stripe-card" 
+              for="stripe-card"
               data-tid="stripe_elements.form.card_label">Card</label>
             <div
               ref="card"
@@ -179,7 +179,7 @@ export default {
     amount: 5.0
   }),
   mounted: function() {
-    const stripe = Stripe(config.testStripeKey);
+    const stripe = Stripe(config.TEST_STRIPE_KEY);
     this.stripe = stripe;
     const elements = stripe.elements();
 
