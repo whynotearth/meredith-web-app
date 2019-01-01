@@ -266,7 +266,7 @@ export default {
         const token = await this.createToken(this.card)
         // this.componentStatus = this.$machineStates.LOADING
         // TODO: await postTransaction(payload)
-        // this.componentStatus. this.$machineState.SUCCESS
+        // this.componentStatus. this.$machineStates.SUCCESS
       } catch(e) {
         console.error(e)
       }
