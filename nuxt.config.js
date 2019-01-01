@@ -73,12 +73,15 @@ module.exports = {
       const routes = [
         ...Object.keys(data.business),
       ];
-      Object.values(data.business).forEach(({business, stories}) =>
+      Object.values(data.business).forEach(({business, stories}) => {
+        routes.push(`${business.id}/checkout`); // adds checkout route for each business
+
         stories.forEach((story) => {
           if (story.slug) {
             routes.push(`${business.id}/${story.slug}`);
           }
-        }));
+        })
+      });
       return routes;
     }
   },
