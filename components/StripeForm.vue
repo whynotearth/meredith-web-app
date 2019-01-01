@@ -177,9 +177,10 @@ export default {
     stripe: null,
     card: null,
     amount: 5.0,
-    componentStatus: this.$machineStates.IDLE
+    componentStatus: null
   }),
   mounted: function() {
+    this.componentStatus = this.$machineStates.IDLE
     const stripe = Stripe(config.TEST_STRIPE_KEY);
     this.stripe = stripe;
     const elements = stripe.elements();
