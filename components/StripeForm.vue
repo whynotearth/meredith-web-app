@@ -176,10 +176,11 @@ export default {
   data: () => ({
     stripe: null,
     card: null,
-    amount: 5.0,
-    appStatus: this.$machineStates.IDLE
+    amount: config.DEFAULT_DONATION_AMOUNT,
+    componentStatus: null
   }),
   mounted: function() {
+    this.componentStatus = this.$machineStates.IDLE
     const stripe = Stripe(config.TEST_STRIPE_KEY);
     this.stripe = stripe;
     const elements = stripe.elements();
@@ -202,7 +203,7 @@ export default {
       country: "US",
       currency: "usd",
       total: {
-        amount: 500,
+        amount: this.amount * 100, // TODO: confirm that this calculation is accurate
         label: "Total"
       },
     });
@@ -263,9 +264,9 @@ export default {
     onSubmit: async function() {
       try {
         const token = await this.createToken(this.card)
-        // this.appStatus = this.$machineStates.LOADING
+        // this.componentStatus = this.$machineStates.LOADING
         // TODO: await postTransaction(payload)
-        // this.appStatus. this.$machineState.SUCCESS
+        // this.componentStatus. this.$machineStates.SUCCESS
       } catch(e) {
         console.error(e)
       }
