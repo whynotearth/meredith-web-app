@@ -176,7 +176,7 @@ export default {
   data: () => ({
     stripe: null,
     card: null,
-    amount: 5.0,
+    amount: config.DEFAULT_DONATION_AMOUNT,
     componentStatus: null
   }),
   mounted: function() {
@@ -203,7 +203,7 @@ export default {
       country: "US",
       currency: "usd",
       total: {
-        amount: 500,
+        amount: this.amount * 100, // TODO: confirm that this calculation is accurate
         label: "Total"
       },
     });
