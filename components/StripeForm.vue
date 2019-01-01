@@ -177,7 +177,7 @@ export default {
     stripe: null,
     card: null,
     amount: 5.0,
-    appStatus: this.$machineStates.IDLE
+    componentStatus: this.$machineStates.IDLE
   }),
   mounted: function() {
     const stripe = Stripe(config.TEST_STRIPE_KEY);
@@ -263,9 +263,9 @@ export default {
     onSubmit: async function() {
       try {
         const token = await this.createToken(this.card)
-        // this.appStatus = this.$machineStates.LOADING
+        // this.componentStatus = this.$machineStates.LOADING
         // TODO: await postTransaction(payload)
-        // this.appStatus. this.$machineState.SUCCESS
+        // this.componentStatus. this.$machineState.SUCCESS
       } catch(e) {
         console.error(e)
       }
