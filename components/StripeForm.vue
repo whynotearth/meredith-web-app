@@ -146,6 +146,8 @@
 
 <script>
 import config from '@/config'
+import { mapActions } from 'vuex'
+
 const cardElementConfig = {
   hidePostalCode: true,
   iconStyle: "solid",
@@ -175,6 +177,7 @@ const cardElementConfig = {
 export default {
   data: () => ({
     stripe: null,
+    token: null,
     card: null,
     amount: config.DEFAULT_DONATION_AMOUNT,
     componentStatus: null
@@ -185,6 +188,7 @@ export default {
     this.stripe = stripe;
     const elements = stripe.elements();
 
+    // TODO: extract below to own named method, e.g. setupStripeElements
     const card = elements.create("card", cardElementConfig);
     this.card = card;
     card.mount(this.$refs.card);
@@ -209,6 +213,7 @@ export default {
     });
 
   paymentRequest.on("token", function(result) {
+    this.token = result.token.id
     var example = document.querySelector(".stripe");
     example.querySelector(".token").innerText = result.token.id;
     example.classList.add("submitted");
@@ -261,11 +266,17 @@ export default {
 
   },
   methods: {
+    ...mapActions({ postStripeTransaction: 'stripe/postStripeTransaction' }),
     onSubmit: async function() {
       try {
+        // TODO: test out situation with paymentRequest
         const token = await this.createToken(this.card)
         // this.componentStatus = this.$machineStates.LOADING
-        // TODO: await postTransaction(payload)
+        this.postTransaction({
+          token,
+          amount: this.amount,
+          // companyId
+        })
         // this.componentStatus. this.$machineStates.SUCCESS
       } catch(e) {
         console.error(e)
@@ -281,8 +292,8 @@ export default {
         errorElement.textContent = e.message;
       }
     },
-    postTransaction: function () {
-      // TODO
+    postTransaction: async function (payload) {
+      await this.postStripeTransaction(payload)
     }
   }
 };
