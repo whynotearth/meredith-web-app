@@ -1,5 +1,6 @@
 import config from '@/config'
 import axios from 'axios'
+axios.defaults.withCredentials = true
 
 async function postStripeTransaction({
   token,
@@ -15,6 +16,7 @@ async function postStripeTransaction({
     }
     await axios.post(config.API_URL + '/stripe/charge/create', payload)
   } catch (e) {
+    console.error(e)
     throw e
   }
 }

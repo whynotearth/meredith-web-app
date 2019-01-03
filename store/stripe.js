@@ -17,6 +17,7 @@ export const actions = {
       await meredithApi.postStripeTransaction(payload)
       commit('updateTransactionStatus', transactionStatusOptions.SUCCESSS)
     } catch (e) {
+      console.error(e)
       commit('updateTransactionStatus', transactionStatusOptions.ERROR, e)
     }
   }
