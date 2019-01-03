@@ -135,7 +135,7 @@
           role="alert" />
         <button
           type="submit"
-          data-tid="stripe_elements.form.pay_button">Donate $5</button>
+          data-tid="stripe_elements.form.pay_button">Donate ${{ amount }}</button>
         <div id="stripe-paymentRequest">
           <!--Stripe paymentRequestButton Element inserted here when available-->
         </div>
