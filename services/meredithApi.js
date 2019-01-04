@@ -1,6 +1,5 @@
 import config from '@/config'
 import axios from 'axios'
-axios.defaults.withCredentials = true
 
 async function postStripeTransaction({
   token,
