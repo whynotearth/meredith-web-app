@@ -135,7 +135,7 @@
           role="alert" />
         <button
           type="submit"
-          data-tid="stripe_elements.form.pay_button">Donate $5</button>
+          data-tid="stripe_elements.form.pay_button">Donate ${{ amount }}</button>
         <div id="stripe-paymentRequest">
           <!--Stripe paymentRequestButton Element inserted here when available-->
         </div>
@@ -146,6 +146,8 @@
 
 <script>
 import config from '@/config'
+import { mapActions } from 'vuex'
+
 const cardElementConfig = {
   hidePostalCode: true,
   iconStyle: "solid",
@@ -175,6 +177,7 @@ const cardElementConfig = {
 export default {
   data: () => ({
     stripe: null,
+    token: null,
     card: null,
     amount: config.DEFAULT_DONATION_AMOUNT,
     componentStatus: null
@@ -185,6 +188,7 @@ export default {
     this.stripe = stripe;
     const elements = stripe.elements();
 
+    // TODO: extract below to own named method, e.g. setupStripeElements
     const card = elements.create("card", cardElementConfig);
     this.card = card;
     card.mount(this.$refs.card);
@@ -209,6 +213,12 @@ export default {
     });
 
   paymentRequest.on("token", function(result) {
+    this.token = result.token.id
+    this.postStripeTransaction({
+      token: this.token,
+      amount: this.amount,
+      //companyID
+    })
     var example = document.querySelector(".stripe");
     example.querySelector(".token").innerText = result.token.id;
     example.classList.add("submitted");
@@ -261,11 +271,17 @@ export default {
 
   },
   methods: {
+    ...mapActions({ postStripeTransaction: 'stripe/postStripeTransaction' }),
     onSubmit: async function() {
       try {
+        // TODO: test out situation with paymentRequest
         const token = await this.createToken(this.card)
         // this.componentStatus = this.$machineStates.LOADING
-        // TODO: await postTransaction(payload)
+        this.postStripeTransaction({
+          token,
+          amount: this.amount,
+          // companyId
+        })
         // this.componentStatus. this.$machineStates.SUCCESS
       } catch(e) {
         console.error(e)
@@ -275,14 +291,11 @@ export default {
       try {
         const result = await this.stripe.createToken(card)
         if (result.error) throw result.error
-        return result.token
+        return result.token.id
       } catch(e) {
         const errorElement = document.getElementById('card-errors');
         errorElement.textContent = e.message;
       }
-    },
-    postTransaction: function () {
-      // TODO
     }
   }
 };

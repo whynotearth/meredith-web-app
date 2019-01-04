@@ -15,6 +15,7 @@ async function postStripeTransaction({
     }
     await axios.post(config.API_URL + '/stripe/charge/create', payload)
   } catch (e) {
+    console.error(e)
     throw e
   }
 }
