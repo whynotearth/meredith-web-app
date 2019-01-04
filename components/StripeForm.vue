@@ -286,7 +286,7 @@ export default {
       try {
         const result = await this.stripe.createToken(card)
         if (result.error) throw result.error
-        return result.token
+        return result.token.id
       } catch(e) {
         const errorElement = document.getElementById('card-errors');
         errorElement.textContent = e.message;
