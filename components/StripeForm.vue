@@ -214,6 +214,11 @@ export default {
 
   paymentRequest.on("token", function(result) {
     this.token = result.token.id
+    this.postStripeTransaction({
+      token: this.token,
+      amount: this.amount,
+      //companyID
+    })
     var example = document.querySelector(".stripe");
     example.querySelector(".token").innerText = result.token.id;
     example.classList.add("submitted");
