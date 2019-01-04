@@ -5,7 +5,7 @@ export default {
   h2: 'Donate',
   image: 'images/rehash-trash/donate-1.jpeg',
   ctaText: 'Learn More',
-  ctaLink: 'donate',
+  ctaLink: 'checkout',
   stories: [
     {
       image: 'images/rehash-trash/donate-1.jpeg',

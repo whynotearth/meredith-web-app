@@ -5,7 +5,7 @@ export default {
   h2: 'Contact Us',
   image: 'images/rehash-trash/contact.jpeg',
   ctaText: 'Learn More',
-  ctaLink: 'contact',
+  ctaLink: 'checkout',
   stories: [
     {
       image: 'images/rehash-trash/contact.jpeg',

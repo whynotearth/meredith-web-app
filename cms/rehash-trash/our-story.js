@@ -5,7 +5,7 @@ export default {
   slug: 'our-story',
   image: 'images/rehash-trash/2.jpeg',
   ctaText: 'Learn More',
-  ctaLink: 'our-story',
+  ctaLink: 'checkout',
   stories: [
     {
       image: 'images/rehash-trash/2.jpeg',

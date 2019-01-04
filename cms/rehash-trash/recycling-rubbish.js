@@ -5,7 +5,7 @@ export default {
   slug: 'recycling-rubbish',
   image: 'images/rehash-trash/recycling-rubbish-1.jpeg',
   ctaText: 'Learn More',
-  ctaLink: 'recycling-rubbish',
+  ctaLink: 'checkout',
   stories: [
     {
       image: 'images/rehash-trash/recycling-rubbish-1.jpeg',
