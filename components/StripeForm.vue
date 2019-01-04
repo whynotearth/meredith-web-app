@@ -272,7 +272,7 @@ export default {
         // TODO: test out situation with paymentRequest
         const token = await this.createToken(this.card)
         // this.componentStatus = this.$machineStates.LOADING
-        this.postTransaction({
+        this.postStripeTransaction({
           token,
           amount: this.amount,
           // companyId
@@ -291,9 +291,6 @@ export default {
         const errorElement = document.getElementById('card-errors');
         errorElement.textContent = e.message;
       }
-    },
-    postTransaction: async function (payload) {
-      await this.postStripeTransaction(payload)
     }
   }
 };
