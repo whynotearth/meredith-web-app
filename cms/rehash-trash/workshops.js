@@ -5,7 +5,7 @@ export default {
   slug: 'workshops',
   image: 'images/rehash-trash/workshops-1.jpeg',
   ctaText: 'Learn More',
-  ctaLink: 'workshops',
+  ctaLink: 'checkout',
   stories: [
     {
       image: 'images/rehash-trash/workshops-1.jpeg',

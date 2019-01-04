@@ -5,7 +5,7 @@ export default {
   slug: 'renewing-lives',
   image: 'images/rehash-trash/renewing-lives-1.jpeg',
   ctaText: 'Learn More',
-  ctaLink: 'renewing-lives',
+  ctaLink: 'checkout',
   stories: [
     {
       image: 'images/rehash-trash/renewing-lives-1.jpeg',
