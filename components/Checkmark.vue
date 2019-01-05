@@ -1,6 +1,6 @@
 <template>
-  <div class="Checkmark_container">
-    <div class="Checkmark_wrapper">
+  <div class="checkmark_container">
+    <div class="checkmark_wrapper">
       <svg
         id="Layer_1"
         version="1.1"
@@ -72,8 +72,8 @@ export default {
 
 
 <style lang="scss" scoped>
-.Checkmark_container {
-  .Checkmark_wrapper {
+.checkmark_container {
+  .checkmark_wrapper {
     text-align: center;
     margin: auto;
     height: 60%;
@@ -86,6 +86,73 @@ export default {
     -moz-animation: fadein 3s; /* Firefox */
     -webkit-animation: fadein 3s; /* Safari and Chrome */
     -o-animation: fadein 3s; /* Opera */
+  }
+  svg {
+    g {
+      .circle {
+        fill: none;
+        stroke: #1e4164;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+      }
+      .circle {
+        stroke-dasharray: 300 300;
+        animation: circle 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.15s;
+        -webkit-animation: circle 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.15s;
+        -moz-animation: circle 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.15s;
+        -o-animation: circle 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.15s;
+        opacity: 0;
+      }
+      .circle-dash {
+        fill: none;
+        stroke: #1e4164;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+      }
+      .circle-dash {
+        stroke-dasharray: 10 300;
+        animation: circledash 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.05s;
+        -webkit-animation: circledash 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.05s;
+        -moz-animation: circledash 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.05s;
+        -o-animation: circledash 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.05s;
+        opacity: 0;
+      }
+      .check {
+        fill: none;
+        stroke: #1e4164;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+      }
+      .check-dash {
+        fill: none;
+        stroke: #1e4164;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+      }
+
+      .check-dash {
+        stroke-dasharray: 10 100;
+        animation: check-dash 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards;
+        -webkit-animation: check-dash 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards;
+        -moz-animation: check-dash 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards;
+        -o-animation: check-dash 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards;
+      }
+
+      .check {
+        stroke-dasharray: 60 100;
+        animation: check 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards 0.15s;
+        -webkit-animation: check 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards 0.15s;
+        -moz-animation: check 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards 0.15s;
+        -o-animation: check 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards 0.15s;
+        opacity: 0;
+      }
+    }
   }
 }
 
@@ -120,46 +187,6 @@ export default {
     to {
         opacity: 1;
     }
-}
-
-.circle {
-  fill: none;
-  stroke: #1e4164;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-miterlimit: 10;
-}
-.circle-dash {
-  fill: none;
-  stroke: #1e4164;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-miterlimit: 10;
-}
-.check {
-  fill: none;
-  stroke: #1e4164;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-miterlimit: 10;
-}
-.check-dash {
-  fill: none;
-  stroke: #1e4164;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-miterlimit: 10;
-}
-
-.check {
-  stroke-dasharray: 60 100;
-  animation: check 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards 0.15s;
-  -webkit-animation: check 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards 0.15s;
-  -moz-animation: check 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards 0.15s;
-  -o-animation: check 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards 0.15s;
-  opacity: 0;
 }
 
 @-webkit-keyframes check {
@@ -198,14 +225,6 @@ export default {
   }
 }
 
-.check-dash {
-  stroke-dasharray: 10 100;
-  animation: check-dash 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards;
-  -webkit-animation: check-dash 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards;
-  -moz-animation: check-dash 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards;
-  -o-animation: check-dash 1.2s cubic-bezier(0.5, 0, 0.6, 1) forwards;
-}
-
 @-webkit-keyframes check-dash {
   from {
     stroke-dashoffset: 120;
@@ -231,15 +250,6 @@ export default {
   to {
     stroke-dashoffset: 45;
   }
-}
-
-.circle {
-  stroke-dasharray: 300 300;
-  animation: circle 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.15s;
-  -webkit-animation: circle 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.15s;
-  -moz-animation: circle 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.15s;
-  -o-animation: circle 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.15s;
-  opacity: 0;
 }
 
 @-webkit-keyframes circle {
@@ -275,15 +285,6 @@ export default {
   }
 }
 
-.circle-dash {
-  stroke-dasharray: 10 300;
-  animation: circledash 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.05s;
-  -webkit-animation: circledash 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.05s;
-  -moz-animation: circledash 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.05s;
-  -o-animation: circledash 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.05s;
-  opacity: 0;
-}
-
 @-webkit-keyframes circledash {
   from {
     stroke-dashoffset: 320;
@@ -315,58 +316,5 @@ export default {
     stroke-dashoffset: 20;
     opacity: 1;
   }
-}
-
-.myButton {
-  -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
-  -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
-  box-shadow: inset 0px 1px 0px 0px #ffffff;
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0.05, #ffffff),
-    color-stop(1, #f6f6f6)
-  );
-  background: -moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-  background: -webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-  background: -o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-  background: -ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-  background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
-  background-color: #ffffff;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  border: 1px solid #dcdcdc;
-  display: inline-block;
-  cursor: pointer;
-  color: #1e4164;
-  font-family: Arial;
-  font-size: 15px;
-  font-weight: regular;
-  padding: 6px 24px;
-  text-decoration: none;
-  text-shadow: 0px 2px 0px #ffffff;
-}
-.myButton:hover {
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0.05, #f6f6f6),
-    color-stop(1, #ffffff)
-  );
-  background: -moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-  background: -webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-  background: -o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-  background: -ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
-  background-color: #f6f6f6;
-}
-.myButton:active {
-  position: relative;
-  top: 1px;
 }
 </style>
