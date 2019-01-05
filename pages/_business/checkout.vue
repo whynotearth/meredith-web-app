@@ -6,6 +6,11 @@
     >
       <loading message="Submitting transaction..."/>
     </div>
+    <checkmark
+      v-if="transactionStatus === 'success'"
+      color="#fbfbfb"
+      message="Success!"
+    />
     <stripe-form v-else/>
   </base-card>
 </template>
@@ -14,6 +19,7 @@
 import StripeForm from "@/components/StripeForm";
 import BaseCard from "@/components/BaseCard";
 import Loading from "@/components/Loading";
+import Checkmark from "@/components/Checkmark";
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -21,7 +27,8 @@ export default {
   components: {
     StripeForm,
     BaseCard,
-    Loading
+    Loading,
+    Checkmark
   },
   data() {
     return {
