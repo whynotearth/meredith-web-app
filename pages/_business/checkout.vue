@@ -4,7 +4,7 @@
       v-if="transactionStatus === 'submitting'"
       class="loading-container"
     >
-      <loading message="Submitting transaction..."/>
+      <loading />
     </div>
     <checkmark
       v-else-if="transactionStatus === 'success'"
