@@ -7,7 +7,7 @@
       <loading message="Submitting transaction..."/>
     </div>
     <checkmark
-      v-if="transactionStatus === 'success'"
+      v-else-if="transactionStatus === 'success'"
       color="#fbfbfb"
       message="Success!"
     />
