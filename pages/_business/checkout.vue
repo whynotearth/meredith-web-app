@@ -1,16 +1,17 @@
 <template>
   <base-card :attributes="checkoutCard">
     <div
+      v-if="transactionStatus === 'submitting'"
       class="loading-container"
     >
       <loading message="Submitting transaction..."/>
     </div>
-    <!-- <checkmark
+    <checkmark
       v-else-if="transactionStatus === 'success'"
       color="#fbfbfb"
       message="Success!"
-    /> -->
-    <!-- <stripe-form v-else/> -->
+    />
+    <stripe-form v-else/>
   </base-card>
 </template>
 
