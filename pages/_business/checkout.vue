@@ -1,6 +1,8 @@
 <template>
   <base-card :attributes="checkoutCard">
-    <loading />
+    <div class="loading-container">
+      <loading message="Submitting transaction..."/>
+    </div>
     <!-- <loading v-if="transactionStatus === 'submitting'" /> -->
     <!-- <stripe-form v-else/> -->
   </base-card>
@@ -46,4 +48,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.loading-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
