@@ -7,17 +7,14 @@
       <main>
         <slot />
       </main>
-      <slot name="footer" />
     </div>
   </div>
 </template>
 
 <script>
-import StoryHeader from '@/components/StoryHeader';
 
 export default {
   name: "BaseCard",
-  components: { StoryHeader },
   props: {
     attributes: {
       type: Object,
