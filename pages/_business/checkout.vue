@@ -1,7 +1,8 @@
 <template>
   <page
     :attributes="checkoutCard"
-    :business="business">
+    :business="business"
+    title="Checkout">
     <header>
       {{ checkoutCard.title }}
     </header>
