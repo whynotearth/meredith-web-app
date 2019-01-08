@@ -23,7 +23,7 @@ import StripeForm from "@/components/StripeForm";
 import Page from "@/components/Page";
 import Loading from "@/components/Loading";
 import Checkmark from "@/components/Checkmark";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "Checkout",
@@ -59,7 +59,7 @@ export default {
     this.updateTransactionStatus(null);
   },
   methods: {
-    ...mapActions({ updateTransactionStatus: "stripe/updateTransactionStatus" })
+    ...mapMutations({ updateTransactionStatus: "stripe/updateTransactionStatus" })
   }
 };
 </script>
