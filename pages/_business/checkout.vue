@@ -1,5 +1,7 @@
 <template>
-  <base-card :attributes="checkoutCard">
+  <page
+    :attributes="checkoutCard"
+    :business="business">
     <header>
       {{ checkoutCard.title }}
     </header>
@@ -15,12 +17,12 @@
       message="Success!"
     />
     <stripe-form v-else/>
-  </base-card>
+  </page>
 </template>
 
 <script>
 import StripeForm from "@/components/StripeForm";
-import BaseCard from "@/components/BaseCard";
+import Page from "@/components/Page";
 import Loading from "@/components/Loading";
 import Checkmark from "@/components/Checkmark";
 import { mapState, mapActions } from "vuex";
@@ -29,9 +31,14 @@ export default {
   name: "Checkout",
   components: {
     StripeForm,
-    BaseCard,
+    Page,
     Loading,
     Checkmark
+  },
+  async asyncData({ app, params }) {
+    const { business } = await import(`@/cms/${params.business}`);
+
+    return { business };
   },
   data() {
     return {
