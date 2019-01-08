@@ -1,7 +1,6 @@
 <template>
   <header key="header">
     <slider
-      v-if="length"
       :length="length"
       :story-id="storyId"/>
     <section class="content__wrapper">
