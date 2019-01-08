@@ -1,19 +1,18 @@
 <template>
   <div
-    class="container">
+    class="container"
+  >
     <!-- <background :image="backgroundImage"/> -->
     <section class="story__wrapper">
       <story-header
         key="header"
-        :title="story.title"
-        :length="story.stories.length"
-        :story-id="storyId"
-        :logo="logo"
-        :home="home"/>
+        :title="title"
+        :logo="business.logo"
+        :home="business.id"/>
 
-        <base-card>
-          <slot />
-        </base-card>
+      <base-card :style="attributes.style">
+        <slot />
+      </base-card>
 
     </section>
   </div>
@@ -26,6 +25,14 @@ import Background from '@/components/Background';
 export default {
   components: { BaseCard, StoryHeader, Background },
   props: {
+    'attributes': {
+      type: Object,
+      default: () => {}
+    },
+    'business': {
+      type: Object,
+      default: () => {}
+    },
     'home': {
       type: String,
       default: '',
@@ -34,6 +41,10 @@ export default {
       type: String,
       default: '',
     },
+    'title': {
+      type: String,
+      default: ''
+    }
   },
   computed: {
     backgroundImage() {
