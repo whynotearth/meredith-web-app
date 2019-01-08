@@ -2,14 +2,19 @@
   <div
     key="slider"
     class="slider">
+    <template v-if="length > 0">
+      <div
+        v-for="(item, i) in new Array(length)"
+        :key="`slider_${i}`"
+        :class="{
+          'is-active': i === storyId,
+        }"
+        class="slider__item"
+      />
+    </template>
     <div
-      v-for="(item, i) in new Array(length)"
-      :key="`slider_${i}`"
-      :class="{
-        'is-active': i === storyId,
-      }"
-      class="slider__item"
-    />
+      v-else
+      class="filler"/>
   </div>
 </template>
 <script>
@@ -44,6 +49,11 @@ export default {
     &.is-active {
       background-color: #fff;
     }
+  }
+  .filler {
+    height: 5px;
+    margin: 5px;
+    flex: 1;
   }
 }
 </style>
