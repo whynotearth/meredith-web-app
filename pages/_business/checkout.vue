@@ -1,10 +1,10 @@
 <template>
   <page
-    :attributes="checkoutCard"
+    :attributes="checkoutPage"
     :business="business"
     title="Checkout">
     <header>
-      {{ checkoutCard.title }}
+      {{ checkoutPage.title }}
     </header>
     <div
       v-if="transactionStatus === 'submitting'"
@@ -43,7 +43,7 @@ export default {
   },
   data() {
     return {
-      checkoutCard: {
+      checkoutPage: {
         name: "Checkout",
         title: "Stripe checkout form",
         style: {
