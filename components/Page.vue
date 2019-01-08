@@ -11,6 +11,9 @@
         :home="business.id"/>
 
       <base-card :style="attributes.style">
+        <header v-if="attributes.title">
+          {{ attributes.title }}
+        </header>
         <slot />
       </base-card>
 
