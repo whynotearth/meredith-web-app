@@ -1,5 +1,8 @@
 <template>
   <base-card :attributes="checkoutCard">
+    <header>
+      {{ checkoutCard.title }}
+    </header>
     <div
       v-if="transactionStatus === 'submitting'"
       class="loading-container"

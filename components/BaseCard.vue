@@ -4,9 +4,6 @@
       :style="attributes.style"
       class="card__wrapper"
     >
-      <header v-if="attributes.title">
-        {{ attributes.title }}
-      </header>
       <main>
         <slot />
       </main>
@@ -16,8 +13,11 @@
 </template>
 
 <script>
+import StoryHeader from '@/components/StoryHeader';
+
 export default {
   name: "BaseCard",
+  components: { StoryHeader },
   props: {
     attributes: {
       type: Object,
