@@ -1,6 +1,7 @@
 <template>
   <header key="header">
     <slider
+      v-if="length"
       :length="length"
       :story-id="storyId"/>
     <section class="content__wrapper">
@@ -10,7 +11,9 @@
           :alt="title"
           class="logo">
       </nuxt-link>
-      <h1>{{ title }}</h1>
+      <h1 v-if="title">
+        {{ title }}
+      </h1>
     </section>
   </header>
 </template>
