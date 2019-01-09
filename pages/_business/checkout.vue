@@ -4,7 +4,7 @@
     :business="business"
     title="Checkout"
     body="StripeForm"
-    component-status="loading"
+    :component-status="transactionStatus"
   />
 </template>
 
