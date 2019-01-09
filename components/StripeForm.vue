@@ -175,6 +175,7 @@ const cardElementConfig = {
 }
 
 export default {
+  name: 'StripeForm',
   data: () => ({
     stripe: null,
     token: null,
