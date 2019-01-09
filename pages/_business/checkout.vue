@@ -2,9 +2,9 @@
   <page
     :attributes="pageAttributes"
     :business="business"
+    :component-status="transactionStatus"
     title="Checkout"
     body="StripeForm"
-    :component-status="transactionStatus"
   />
 </template>
 
@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     ...mapState({
-      transactionStatus: state => 'submitting'
+      transactionStatus: state => state.stripe.transactionStatus
     })
   },
   created() {
