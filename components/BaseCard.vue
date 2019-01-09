@@ -1,29 +1,19 @@
 <template>
   <div class="container">
     <div
-      :style="attributes.style"
       class="card__wrapper"
     >
-      <header v-if="attributes.title">
-        {{ attributes.title }}
-      </header>
       <main>
         <slot />
       </main>
-      <slot name="footer" />
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
-  name: "BaseCard",
-  props: {
-    attributes: {
-      type: Object,
-      default: () => {}
-    }
-  }
+  name: "BaseCard"
 };
 </script>
 
@@ -33,12 +23,10 @@ export default {
   display: block;
   height: 100vh;
   overflow: hidden;
-  perspective: 640px;
-  perspective-origin: 0 50%;
-  padding: 50px 10px;
+  padding: 80px 20px;
   header {
     text-align: center;
-    font-size: 1.8em;
+    font-size: 1.5em;
     padding: 10px
   }
 }

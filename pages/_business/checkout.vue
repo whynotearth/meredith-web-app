@@ -1,5 +1,8 @@
 <template>
-  <base-card :attributes="checkoutCard">
+  <page
+    :attributes="pageAttributes"
+    :business="business"
+    title="Checkout">
     <div
       v-if="transactionStatus === 'submitting'"
       class="loading-container"
@@ -12,27 +15,32 @@
       message="Success!"
     />
     <stripe-form v-else/>
-  </base-card>
+  </page>
 </template>
 
 <script>
 import StripeForm from "@/components/StripeForm";
-import BaseCard from "@/components/BaseCard";
+import Page from "@/components/Page";
 import Loading from "@/components/Loading";
 import Checkmark from "@/components/Checkmark";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "Checkout",
   components: {
     StripeForm,
-    BaseCard,
+    Page,
     Loading,
     Checkmark
   },
+  async asyncData({ app, params }) {
+    const { business } = await import(`@/cms/${params.business}`);
+
+    return { business };
+  },
   data() {
     return {
-      checkoutCard: {
+      pageAttributes: {
         name: "Checkout",
         title: "Stripe checkout form",
         style: {
@@ -51,7 +59,7 @@ export default {
     this.updateTransactionStatus(null);
   },
   methods: {
-    ...mapActions({ updateTransactionStatus: "stripe/updateTransactionStatus" })
+    ...mapMutations({ updateTransactionStatus: "stripe/updateTransactionStatus" })
   }
 };
 </script>
