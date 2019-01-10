@@ -2,32 +2,52 @@
   <div
     class="container"
   >
-    <!-- <background :image="backgroundImage"/> -->
     <section class="story__wrapper">
       <story-header
         key="header"
         :title="title"
         :logo="business.logo"
         :home="business.id"/>
-
       <base-card :style="attributes.style">
         <header v-if="attributes.title">
           {{ attributes.title }}
         </header>
-        <slot />
+        <div
+          v-if="componentStatus === 'submitting' || componentStatus === 'loading' "
+          class="loading-container"
+        >
+          <loading />
+        </div>
+        <checkmark
+          v-else-if="componentStatus === 'success'"
+          color="#fbfbfb"
+          message="Success!"
+        />
+        <component
+          v-else
+          :is="body" />
       </base-card>
-
     </section>
   </div>
 </template>
 <script>
 import BaseCard from '@/components/BaseCard';
 import StoryHeader from '@/components/StoryHeader';
-import Background from '@/components/Background';
+import Loading from "@/components/Loading";
+import Checkmark from "@/components/Checkmark";
+import StripeForm from "@/components/StripeForm";
 
 export default {
-  components: { BaseCard, StoryHeader, Background },
+  components: { BaseCard, Checkmark, Loading, StoryHeader, StripeForm },
   props: {
+    'componentStatus': {
+      type: String,
+      default: ''
+    },
+    'body': {
+      type: String,
+      default: () => {}
+    },
     'attributes': {
       type: Object,
       default: () => {}
@@ -48,11 +68,6 @@ export default {
       type: String,
       default: ''
     }
-  },
-  computed: {
-    backgroundImage() {
-      return this.story.stories[this.storyId] && this.story.stories[this.storyId].image || null;
-    },
   }
 }
 </script>
@@ -70,6 +85,12 @@ export default {
   background-color: #333;
   perspective: 640px;
   perspective-origin: 0 50%;
+  .loading-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh
+  }
 }
 @media (min-width: 550px){
   .container {

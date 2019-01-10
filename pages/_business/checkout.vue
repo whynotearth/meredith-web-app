@@ -2,36 +2,20 @@
   <page
     :attributes="pageAttributes"
     :business="business"
-    title="Checkout">
-    <div
-      v-if="transactionStatus === 'submitting'"
-      class="loading-container"
-    >
-      <loading />
-    </div>
-    <checkmark
-      v-else-if="transactionStatus === 'success'"
-      color="#fbfbfb"
-      message="Success!"
-    />
-    <stripe-form v-else/>
-  </page>
+    :component-status="transactionStatus"
+    title="Checkout"
+    body="StripeForm"
+  />
 </template>
 
 <script>
-import StripeForm from "@/components/StripeForm";
 import Page from "@/components/Page";
-import Loading from "@/components/Loading";
-import Checkmark from "@/components/Checkmark";
 import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "Checkout",
   components: {
-    StripeForm,
-    Page,
-    Loading,
-    Checkmark
+    Page
   },
   async asyncData({ app, params }) {
     const { business } = await import(`@/cms/${params.business}`);
@@ -63,12 +47,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.loading-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50vh
-}
-</style>
