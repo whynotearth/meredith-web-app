@@ -34,7 +34,7 @@
               id="stripe-email"
               data-tid="stripe_elements.form.email_placeholder"
               class="input"
-              type="text"
+              type="email"
               placeholder="janedoe@gmail.com"
               required
               autocomplete="email">
