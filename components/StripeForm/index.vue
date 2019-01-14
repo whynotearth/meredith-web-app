@@ -65,7 +65,7 @@
                 data-tid="stripe_elements.form.address_label">Address</label>
               <input
                 id="stripe-address"
-                v-model="additionalData.address"
+                v-model="additionalData.address_line1"
                 data-tid="stripe_elements.form.address_placeholder"
                 class="input"
                 type="text"
@@ -85,7 +85,7 @@
                 data-tid="stripe_elements.form.city_label">City</label>
               <input
                 id="stripe-city"
-                v-model="additionalData.city"
+                v-model="additionalData.address_city"
                 data-tid="stripe_elements.form.city_placeholder"
                 class="input"
                 type="text"
@@ -100,7 +100,7 @@
                 data-tid="stripe_elements.form.state_label">State</label>
               <input
                 id="stripe-state"
-                v-model="additionalData.state"
+                v-model="additionalData.address_state"
                 data-tid="stripe_elements.form.state_placeholder"
                 class="input empty"
                 type="text"
@@ -115,7 +115,7 @@
                 data-tid="stripe_elements.form.postal_code_label">ZIP</label>
               <input
                 id="stripe-zip"
-                v-model="additionalData.postal_code"
+                v-model="additionalData.address_zip"
                 data-tid="stripe_elements.form.postal_code_placeholder"
                 class="input empty"
                 type="text"
@@ -163,10 +163,10 @@ export default {
       name: null,
       email: null,
       phone: null,
-      address: null,
-      city: null,
-      state: null,
-      postal_code: null
+      address_line1: null,
+      address_city: null,
+      address_state: null,
+      address_zip: null
     },
     stripe: null,
     token: null,
