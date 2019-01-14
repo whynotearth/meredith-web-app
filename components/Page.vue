@@ -85,6 +85,7 @@ export default {
   background-color: #333;
   perspective: 640px;
   perspective-origin: 0 50%;
+  border-radius: 15px;
   .loading-container{
     display: flex;
     justify-content: center;

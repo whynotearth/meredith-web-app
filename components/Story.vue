@@ -86,6 +86,7 @@ export default {
   background-color: #333;
   perspective: 640px;
   perspective-origin: 0 50%;
+  border-radius: 15px;
 }
 @media (min-width: 550px){
   .container {
