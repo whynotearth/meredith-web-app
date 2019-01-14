@@ -267,7 +267,7 @@ export default {
     onSubmit: async function() {
       try {
         // TODO: test out situation with paymentRequest
-        const token = await this.createToken(this.card)
+        const token = await this.createToken(this.card, this.additionalData)
         // this.componentStatus = this.$machineStates.LOADING
         this.postStripeTransaction({
           token,
@@ -279,9 +279,9 @@ export default {
         console.error(e)
       }
     },
-    createToken: async function (card) {
+    createToken: async function (card, additionalData) {
       try {
-        const result = await this.stripe.createToken(card)
+        const result = await this.stripe.createToken(card, additionalData)
         if (result.error) throw result.error
         return result.token.id
       } catch(e) {
