@@ -47,6 +47,7 @@
               data-tid="stripe_elements.form.phone_label">Phone</label>
             <input
               id="stripe-phone"
+              v-model="additionalData.phone"
               data-tid="stripe_elements.form.phone_placeholder"
               class="input"
               type="text"
