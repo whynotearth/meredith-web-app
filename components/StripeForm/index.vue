@@ -16,6 +16,7 @@
               data-tid="stripe_elements.form.name_label">Name</label>
             <input
               id="stripe-name"
+              v-model="additionalData.name"
               data-tid="stripe_elements.form.name_placeholder"
               class="input"
               type="text"
@@ -32,6 +33,7 @@
               data-tid="stripe_elements.form.email_label">Email</label>
             <input
               id="stripe-email"
+              v-model="additionalData.email"
               data-tid="stripe_elements.form.email_placeholder"
               class="input"
               type="email"
@@ -62,6 +64,7 @@
                 data-tid="stripe_elements.form.address_label">Address</label>
               <input
                 id="stripe-address"
+                v-model="additionalData.address"
                 data-tid="stripe_elements.form.address_placeholder"
                 class="input"
                 type="text"
@@ -81,6 +84,7 @@
                 data-tid="stripe_elements.form.city_label">City</label>
               <input
                 id="stripe-city"
+                v-model="additionalData.city"
                 data-tid="stripe_elements.form.city_placeholder"
                 class="input"
                 type="text"
@@ -95,6 +99,7 @@
                 data-tid="stripe_elements.form.state_label">State</label>
               <input
                 id="stripe-state"
+                v-model="additionalData.state"
                 data-tid="stripe_elements.form.state_placeholder"
                 class="input empty"
                 type="text"
@@ -109,6 +114,7 @@
                 data-tid="stripe_elements.form.postal_code_label">ZIP</label>
               <input
                 id="stripe-zip"
+                v-model="additionalData.postal_code"
                 data-tid="stripe_elements.form.postal_code_placeholder"
                 class="input empty"
                 type="text"
@@ -152,6 +158,15 @@ import cardElementConfig from './cardElementConfig'
 export default {
   name: 'StripeForm',
   data: () => ({
+    additionalData: {
+      name: null,
+      email: null,
+      phone: null,
+      address: null,
+      city: null,
+      state: null,
+      postal_code: null
+    },
     stripe: null,
     token: null,
     card: null,
