@@ -35,7 +35,7 @@ import BaseCard from '@/components/BaseCard';
 import StoryHeader from '@/components/StoryHeader';
 import Loading from "@/components/Loading";
 import Checkmark from "@/components/Checkmark";
-import StripeForm from "@/components/StripeForm";
+import StripeForm from "@/components/StripeForm/index";
 
 export default {
   components: { BaseCard, Checkmark, Loading, StoryHeader, StripeForm },
