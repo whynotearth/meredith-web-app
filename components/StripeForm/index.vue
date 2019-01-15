@@ -16,6 +16,7 @@
               data-tid="stripe_elements.form.name_label">Name</label>
             <input
               id="stripe-name"
+              v-model="additionalData.name"
               data-tid="stripe_elements.form.name_placeholder"
               class="input"
               type="text"
@@ -32,6 +33,7 @@
               data-tid="stripe_elements.form.email_label">Email</label>
             <input
               id="stripe-email"
+              v-model="additionalData.email"
               data-tid="stripe_elements.form.email_placeholder"
               class="input"
               type="email"
@@ -45,6 +47,7 @@
               data-tid="stripe_elements.form.phone_label">Phone</label>
             <input
               id="stripe-phone"
+              v-model="additionalData.phone"
               data-tid="stripe_elements.form.phone_placeholder"
               class="input"
               type="text"
@@ -62,6 +65,7 @@
                 data-tid="stripe_elements.form.address_label">Address</label>
               <input
                 id="stripe-address"
+                v-model="additionalData.address_line1"
                 data-tid="stripe_elements.form.address_placeholder"
                 class="input"
                 type="text"
@@ -81,6 +85,7 @@
                 data-tid="stripe_elements.form.city_label">City</label>
               <input
                 id="stripe-city"
+                v-model="additionalData.address_city"
                 data-tid="stripe_elements.form.city_placeholder"
                 class="input"
                 type="text"
@@ -95,6 +100,7 @@
                 data-tid="stripe_elements.form.state_label">State</label>
               <input
                 id="stripe-state"
+                v-model="additionalData.address_state"
                 data-tid="stripe_elements.form.state_placeholder"
                 class="input empty"
                 type="text"
@@ -109,6 +115,7 @@
                 data-tid="stripe_elements.form.postal_code_label">ZIP</label>
               <input
                 id="stripe-zip"
+                v-model="additionalData.address_zip"
                 data-tid="stripe_elements.form.postal_code_placeholder"
                 class="input empty"
                 type="text"
@@ -152,6 +159,15 @@ import cardElementConfig from './cardElementConfig'
 export default {
   name: 'StripeForm',
   data: () => ({
+    additionalData: {
+      name: null,
+      email: null,
+      phone: null,
+      address_line1: null,
+      address_city: null,
+      address_state: null,
+      address_zip: null
+    },
     stripe: null,
     token: null,
     card: null,
@@ -251,7 +267,7 @@ export default {
     onSubmit: async function() {
       try {
         // TODO: test out situation with paymentRequest
-        const token = await this.createToken(this.card)
+        const token = await this.createToken(this.card, this.additionalData)
         // this.componentStatus = this.$machineStates.LOADING
         this.postStripeTransaction({
           token,
@@ -263,9 +279,9 @@ export default {
         console.error(e)
       }
     },
-    createToken: async function (card) {
+    createToken: async function (card, additionalData) {
       try {
-        const result = await this.stripe.createToken(card)
+        const result = await this.stripe.createToken(card, additionalData)
         if (result.error) throw result.error
         return result.token.id
       } catch(e) {
