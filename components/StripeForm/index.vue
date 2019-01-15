@@ -47,7 +47,7 @@
               data-tid="stripe_elements.form.phone_label">Phone</label>
             <input
               id="stripe-phone"
-              v-model="additionalData.phone_number"
+              v-model="metadata.phone_number"
               data-tid="stripe_elements.form.phone_placeholder"
               class="input"
               type="text"
@@ -155,6 +155,7 @@
 import config from '@/config'
 import { mapActions } from 'vuex'
 import cardElementConfig from './cardElementConfig'
+import registerElements from './registerElements'
 
 export default {
   name: 'StripeForm',
@@ -162,107 +163,30 @@ export default {
     additionalData: {
       name: null,
       email: null,
-      phone_number: null,
       address_line1: null,
       address_city: null,
       address_state: null,
       address_zip: null
     },
-    stripe: null,
+    stripeConfig: {
+      stripe: null,
+      elements: null
+    },
     token: null,
     card: null,
+    metadata: {
+      phone_number: null
+    },
     amount: config.DEFAULT_DONATION_AMOUNT,
     componentStatus: null
   }),
   mounted: function() {
     this.componentStatus = this.$machineStates.IDLE
     const stripe = Stripe(config.TEST_STRIPE_KEY);
-    this.stripe = stripe;
-    const elements = stripe.elements();
-
-    // TODO: extract below to own named method, e.g. setupStripeElements
-    const card = elements.create("card", cardElementConfig);
-    this.card = card;
-    card.mount(this.$refs.card);
-
-    // listen to errors and display in DOM if any
-    card.addEventListener('change', ({ error }) => {
-      const displayError = document.getElementById('card-errors');
-      if (error) {
-        displayError.textContent = error.message;
-      } else {
-        displayError.textContent = '';
-      }
-    });
-
-    var paymentRequest = stripe.paymentRequest({
-      country: "US",
-      currency: "usd",
-      total: {
-        amount: this.amount * 100, // TODO: confirm that this calculation is accurate
-        label: "Total"
-      },
-    });
-
-  paymentRequest.on("token", function(result) {
-    this.token = result.token.id
-    this.postStripeTransaction({
-      token: this.token,
-      amount: this.amount,
-      email: this.additionalData.email,
-      metadata: {
-        phone_number: this.additionalData.phone_number
-      }
-    })
-    var example = document.querySelector(".stripe");
-    example.querySelector(".token").innerText = result.token.id;
-    example.classList.add("submitted");
-    result.complete("success");
-  });
-
-  var paymentRequestElement = elements.create("paymentRequestButton", {
-    paymentRequest: paymentRequest,
-    style: {
-      paymentRequestButton: {
-        theme: "light"
-      }
-    }
-  });
-
-  paymentRequest.canMakePayment().then(function(result) {
-    if (result) {
-      document.querySelector(".stripe .card-only").style.display = "none";
-      document.querySelector(
-        ".stripe .payment-request-available"
-      ).style.display =
-        "block";
-      paymentRequestElement.mount("#stripe-paymentRequest");
-    }
-  });
-
-  function registerElements(elements, exampleName) {
-    var formClass = '.' + exampleName;
-    var example = document.querySelector(formClass);
-
-    var form = example.querySelector('form');
-    var resetButton = example.querySelector('a.reset');
-    // TODO: resolve below
-    // var error = form.querySelector('.error');
-    // var errorMessage = error.querySelector('.message');
-
-    function enableInputs() {
-      Array.prototype.forEach.call(
-        form.querySelectorAll(
-          "input[type='text'], input[type='email'], input[type='tel']"
-        ),
-        function(input) {
-          input.removeAttribute('disabled');
-        }
-      );
-    }
-  }
-
-  registerElements([card], "stripe");
+    this.stripeConfig.stripe = stripe;
+    this.stripeConfig.elements = stripe.elements();
+    this.setupCardElement();
+    this.setupPaymentRequest();
 
   },
   methods: {
@@ -274,17 +198,77 @@ export default {
           token,
           amount: this.amount,
           email: this.additionalData.email,
-          metadata: {
-            phone_number: this.additionalData.phone_number
-          }
+          metadata: this.metadata
         })
       } catch(e) {
         console.error(e)
       }
     },
+    setupCardElement: function () {
+      // TODO: extract below to own named method, e.g. setupStripeElements
+      const card = this.stripeConfig.elements.create("card", cardElementConfig);
+      this.card = card;
+      card.mount(this.$refs.card);
+
+      // listen to errors and display in DOM if any
+      card.addEventListener('change', ({ error }) => {
+        const displayError = document.getElementById('card-errors');
+        if (error) {
+          displayError.textContent = error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+      registerElements([card], "stripe");
+
+    },
+    setupPaymentRequest: function () {
+      var paymentRequest = this.stripeConfig.stripe.paymentRequest({
+        country: "US",
+        currency: "usd",
+        total: {
+          amount: this.amount * 100, // TODO: confirm that this calculation is accurate
+          label: "Total"
+        },
+      });
+
+      paymentRequest.on("token", function(result) {
+        this.token = result.token.id
+        this.postStripeTransaction({
+          token: this.token,
+          amount: this.amount,
+          email: this.additionalData.email,
+          metadata: this.metadata
+        })
+        var example = document.querySelector(".stripe");
+        example.querySelector(".token").innerText = result.token.id;
+        example.classList.add("submitted");
+        result.complete("success");
+      });
+
+      var paymentRequestElement = this.stripeConfig.elements.create("paymentRequestButton", {
+        paymentRequest: paymentRequest,
+        style: {
+          paymentRequestButton: {
+            theme: "light"
+          }
+        }
+      });
+
+      paymentRequest.canMakePayment().then(function(result) {
+        if (result) {
+          document.querySelector(".stripe .card-only").style.display = "none";
+          document.querySelector(
+            ".stripe .payment-request-available"
+          ).style.display =
+            "block";
+          paymentRequestElement.mount("#stripe-paymentRequest");
+        }
+      });
+    },
     createToken: async function (card, additionalData) {
       try {
-        const result = await this.stripe.createToken(card, additionalData)
+        const result = await this.stripeConfig.stripe.createToken(card, additionalData)
         if (result.error) throw result.error
         return result.token.id
       } catch(e) {
