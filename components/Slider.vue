@@ -39,6 +39,7 @@ export default {
   justify-content: space-around;
   z-index: 5;
   position: relative;
+  padding: 5px 10px;
   &__item {
     border-radius: 5px;
     height: 5px;
