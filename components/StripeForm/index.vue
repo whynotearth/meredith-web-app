@@ -47,7 +47,7 @@
               data-tid="stripe_elements.form.phone_label">Phone</label>
             <input
               id="stripe-phone"
-              v-model="additionalData.phone"
+              v-model="additionalData.phone_number"
               data-tid="stripe_elements.form.phone_placeholder"
               class="input"
               type="text"
@@ -162,7 +162,7 @@ export default {
     additionalData: {
       name: null,
       email: null,
-      phone: null,
+      phone_number: null,
       address_line1: null,
       address_city: null,
       address_state: null,
