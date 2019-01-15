@@ -47,7 +47,7 @@
               data-tid="stripe_elements.form.phone_label">Phone</label>
             <input
               id="stripe-phone"
-              v-model="additionalData.phone_number"
+              v-model="metadata.phone_number"
               data-tid="stripe_elements.form.phone_placeholder"
               class="input"
               type="text"
@@ -163,7 +163,6 @@ export default {
     additionalData: {
       name: null,
       email: null,
-      phone_number: null,
       address_line1: null,
       address_city: null,
       address_state: null,
@@ -175,6 +174,9 @@ export default {
     },
     token: null,
     card: null,
+    metadata: {
+      phone_number: null
+    },
     amount: config.DEFAULT_DONATION_AMOUNT,
     componentStatus: null
   }),
@@ -196,9 +198,7 @@ export default {
           token,
           amount: this.amount,
           email: this.additionalData.email,
-          metadata: {
-            phone_number: this.additionalData.phone_number
-          }
+          metadata: this.metadata
         })
       } catch(e) {
         console.error(e)
@@ -238,9 +238,7 @@ export default {
           token: this.token,
           amount: this.amount,
           email: this.additionalData.email,
-          metadata: {
-            phone_number: this.additionalData.phone_number
-          }
+          metadata: this.metadata
         })
         var example = document.querySelector(".stripe");
         example.querySelector(".token").innerText = result.token.id;
