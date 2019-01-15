@@ -235,20 +235,6 @@ export default {
         },
       });
 
-      paymentRequest.on("token", function(result) {
-        this.token = result.token.id
-        this.postStripeTransaction({
-          token: this.token,
-          amount: this.amount,
-          email: this.additionalData.email,
-          metadata: this.metadata
-        })
-        var example = document.querySelector(".stripe");
-        example.querySelector(".token").innerText = result.token.id;
-        example.classList.add("submitted");
-        result.complete("success");
-      });
-
       var paymentRequestElement = this.stripeConfig.elements.create("paymentRequestButton", {
         paymentRequest: paymentRequest,
         style: {
@@ -267,6 +253,20 @@ export default {
             "block";
           paymentRequestElement.mount("#stripe-paymentRequest");
         }
+      });
+
+      paymentRequest.on("token", function(result) {
+        this.token = result.token.id
+        this.postStripeTransaction({
+          token: this.token,
+          amount: this.amount,
+          email: this.additionalData.email,
+          metadata: this.metadata
+        })
+        var example = document.querySelector(".stripe");
+        example.querySelector(".token").innerText = result.token.id;
+        example.classList.add("submitted");
+        result.complete("success");
       });
     },
     createToken: async function (card, additionalData) {
