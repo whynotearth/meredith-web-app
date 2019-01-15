@@ -209,7 +209,10 @@ export default {
     this.postStripeTransaction({
       token: this.token,
       amount: this.amount,
-      //companyID
+      email: this.additionalData.email,
+      metadata: {
+        phone_number: this.additionalData.phone_number
+      }
     })
     var example = document.querySelector(".stripe");
     example.querySelector(".token").innerText = result.token.id;
@@ -272,7 +275,10 @@ export default {
         this.postStripeTransaction({
           token,
           amount: this.amount,
-          // companyId
+          email: this.additionalData.email,
+          metadata: {
+            phone_number: this.additionalData.phone_number
+          }
         })
         // this.componentStatus. this.$machineStates.SUCCESS
       } catch(e) {
