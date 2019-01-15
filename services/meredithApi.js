@@ -3,6 +3,8 @@ import axios from 'axios'
 
 async function postStripeTransaction({
   token,
+  metadata,
+  email,
   // TODO: remove below 2 default values after hooked to API
   amount = config.DEFAULT_DONATION_AMOUNT,
   companyId = config.TEST_COMPANY_ID
@@ -11,7 +13,9 @@ async function postStripeTransaction({
     const payload = {
       token,
       amount,
-      companyId
+      companyId,
+      metadata,
+      email
     }
     await axios.post(config.API_URL + '/stripe/charge/create', payload)
   } catch (e) {

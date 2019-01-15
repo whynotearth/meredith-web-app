@@ -47,7 +47,7 @@
               data-tid="stripe_elements.form.phone_label">Phone</label>
             <input
               id="stripe-phone"
-              v-model="additionalData.phone"
+              v-model="additionalData.phone_number"
               data-tid="stripe_elements.form.phone_placeholder"
               class="input"
               type="text"
@@ -162,7 +162,7 @@ export default {
     additionalData: {
       name: null,
       email: null,
-      phone: null,
+      phone_number: null,
       address_line1: null,
       address_city: null,
       address_state: null,
@@ -209,7 +209,10 @@ export default {
     this.postStripeTransaction({
       token: this.token,
       amount: this.amount,
-      //companyID
+      email: this.additionalData.email,
+      metadata: {
+        phone_number: this.additionalData.phone_number
+      }
     })
     var example = document.querySelector(".stripe");
     example.querySelector(".token").innerText = result.token.id;
@@ -266,15 +269,15 @@ export default {
     ...mapActions({ postStripeTransaction: 'stripe/postStripeTransaction' }),
     onSubmit: async function() {
       try {
-        // TODO: test out situation with paymentRequest
         const token = await this.createToken(this.card, this.additionalData)
-        // this.componentStatus = this.$machineStates.LOADING
         this.postStripeTransaction({
           token,
           amount: this.amount,
-          // companyId
+          email: this.additionalData.email,
+          metadata: {
+            phone_number: this.additionalData.phone_number
+          }
         })
-        // this.componentStatus. this.$machineStates.SUCCESS
       } catch(e) {
         console.error(e)
       }
