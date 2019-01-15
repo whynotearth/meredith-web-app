@@ -169,7 +169,10 @@ export default {
       address_state: null,
       address_zip: null
     },
-    stripe: null,
+    stripeConfig: {
+      stripe: null,
+      elements: null
+    },
     token: null,
     card: null,
     amount: config.DEFAULT_DONATION_AMOUNT,
@@ -178,23 +181,9 @@ export default {
   mounted: function() {
     this.componentStatus = this.$machineStates.IDLE
     const stripe = Stripe(config.TEST_STRIPE_KEY);
-    this.stripe = stripe;
-    const elements = stripe.elements();
-
-    // TODO: extract below to own named method, e.g. setupStripeElements
-    const card = elements.create("card", cardElementConfig);
-    this.card = card;
-    card.mount(this.$refs.card);
-
-    // listen to errors and display in DOM if any
-    card.addEventListener('change', ({ error }) => {
-      const displayError = document.getElementById('card-errors');
-      if (error) {
-        displayError.textContent = error.message;
-      } else {
-        displayError.textContent = '';
-      }
-    });
+    this.stripeConfig.stripe = stripe;
+    this.stripeConfig.elements = stripe.elements();
+    this.setupCardElement();
 
     var paymentRequest = stripe.paymentRequest({
       country: "US",
@@ -205,23 +194,23 @@ export default {
       },
     });
 
-  paymentRequest.on("token", function(result) {
-    this.token = result.token.id
-    this.postStripeTransaction({
-      token: this.token,
-      amount: this.amount,
-      email: this.additionalData.email,
-      metadata: {
-        phone_number: this.additionalData.phone_number
-      }
-    })
-    var example = document.querySelector(".stripe");
-    example.querySelector(".token").innerText = result.token.id;
-    example.classList.add("submitted");
-    result.complete("success");
-  });
+    paymentRequest.on("token", function(result) {
+      this.token = result.token.id
+      this.postStripeTransaction({
+        token: this.token,
+        amount: this.amount,
+        email: this.additionalData.email,
+        metadata: {
+          phone_number: this.additionalData.phone_number
+        }
+      })
+      var example = document.querySelector(".stripe");
+      example.querySelector(".token").innerText = result.token.id;
+      example.classList.add("submitted");
+      result.complete("success");
+    });
 
-  var paymentRequestElement = elements.create("paymentRequestButton", {
+  var paymentRequestElement = this.stripeConfig.elements.create("paymentRequestButton", {
     paymentRequest: paymentRequest,
     style: {
       paymentRequestButton: {
@@ -241,8 +230,6 @@ export default {
     }
   });
 
-  registerElements([card], "stripe");
-
   },
   methods: {
     ...mapActions({ postStripeTransaction: 'stripe/postStripeTransaction' }),
@@ -260,6 +247,24 @@ export default {
       } catch(e) {
         console.error(e)
       }
+    },
+    setupCardElement: function () {
+      // TODO: extract below to own named method, e.g. setupStripeElements
+      const card = this.stripeConfig.elements.create("card", cardElementConfig);
+      this.card = card;
+      card.mount(this.$refs.card);
+
+      // listen to errors and display in DOM if any
+      card.addEventListener('change', ({ error }) => {
+        const displayError = document.getElementById('card-errors');
+        if (error) {
+          displayError.textContent = error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+      registerElements([card], "stripe");
+
     },
     createToken: async function (card, additionalData) {
       try {
