@@ -269,9 +269,7 @@ export default {
     ...mapActions({ postStripeTransaction: 'stripe/postStripeTransaction' }),
     onSubmit: async function() {
       try {
-        // TODO: test out situation with paymentRequest
         const token = await this.createToken(this.card, this.additionalData)
-        // this.componentStatus = this.$machineStates.LOADING
         this.postStripeTransaction({
           token,
           amount: this.amount,
@@ -280,7 +278,6 @@ export default {
             phone_number: this.additionalData.phone_number
           }
         })
-        // this.componentStatus. this.$machineStates.SUCCESS
       } catch(e) {
         console.error(e)
       }
