@@ -184,51 +184,7 @@ export default {
     this.stripeConfig.stripe = stripe;
     this.stripeConfig.elements = stripe.elements();
     this.setupCardElement();
-
-    var paymentRequest = stripe.paymentRequest({
-      country: "US",
-      currency: "usd",
-      total: {
-        amount: this.amount * 100, // TODO: confirm that this calculation is accurate
-        label: "Total"
-      },
-    });
-
-    paymentRequest.on("token", function(result) {
-      this.token = result.token.id
-      this.postStripeTransaction({
-        token: this.token,
-        amount: this.amount,
-        email: this.additionalData.email,
-        metadata: {
-          phone_number: this.additionalData.phone_number
-        }
-      })
-      var example = document.querySelector(".stripe");
-      example.querySelector(".token").innerText = result.token.id;
-      example.classList.add("submitted");
-      result.complete("success");
-    });
-
-  var paymentRequestElement = this.stripeConfig.elements.create("paymentRequestButton", {
-    paymentRequest: paymentRequest,
-    style: {
-      paymentRequestButton: {
-        theme: "light"
-      }
-    }
-  });
-
-  paymentRequest.canMakePayment().then(function(result) {
-    if (result) {
-      document.querySelector(".stripe .card-only").style.display = "none";
-      document.querySelector(
-        ".stripe .payment-request-available"
-      ).style.display =
-        "block";
-      paymentRequestElement.mount("#stripe-paymentRequest");
-    }
-  });
+    this.setupPaymentRequest();
 
   },
   methods: {
@@ -266,9 +222,55 @@ export default {
       registerElements([card], "stripe");
 
     },
+    setupPaymentRequest: function () {
+      var paymentRequest = this.stripeConfig.stripe.paymentRequest({
+        country: "US",
+        currency: "usd",
+        total: {
+          amount: this.amount * 100, // TODO: confirm that this calculation is accurate
+          label: "Total"
+        },
+      });
+
+      paymentRequest.on("token", function(result) {
+        this.token = result.token.id
+        this.postStripeTransaction({
+          token: this.token,
+          amount: this.amount,
+          email: this.additionalData.email,
+          metadata: {
+            phone_number: this.additionalData.phone_number
+          }
+        })
+        var example = document.querySelector(".stripe");
+        example.querySelector(".token").innerText = result.token.id;
+        example.classList.add("submitted");
+        result.complete("success");
+      });
+
+      var paymentRequestElement = this.stripeConfig.elements.create("paymentRequestButton", {
+        paymentRequest: paymentRequest,
+        style: {
+          paymentRequestButton: {
+            theme: "light"
+          }
+        }
+      });
+
+      paymentRequest.canMakePayment().then(function(result) {
+        if (result) {
+          document.querySelector(".stripe .card-only").style.display = "none";
+          document.querySelector(
+            ".stripe .payment-request-available"
+          ).style.display =
+            "block";
+          paymentRequestElement.mount("#stripe-paymentRequest");
+        }
+      });
+    },
     createToken: async function (card, additionalData) {
       try {
-        const result = await this.stripe.createToken(card, additionalData)
+        const result = await this.stripeConfig.stripe.createToken(card, additionalData)
         if (result.error) throw result.error
         return result.token.id
       } catch(e) {
