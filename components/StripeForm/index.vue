@@ -245,6 +245,7 @@ export default {
       });
 
       paymentRequest.canMakePayment().then(function(result) {
+        alert(JSON.stringify(result))
         if (result) {
           document.querySelector(".stripe .card-only").style.display = "none";
           document.querySelector(
