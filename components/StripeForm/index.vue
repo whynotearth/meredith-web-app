@@ -146,11 +146,10 @@
           id="card-errors"
           role="alert" />
         <button
-          v-if="paymentMethod === 'default'"
+          id="default-payment-method"
           type="submit"
           data-tid="stripe_elements.form.pay_button">Donate ${{ amount }}</button>
         <div
-          v-else-if="paymentMethod === 'paymentRequest'"
           id="stripe-paymentRequest">
           <!--Stripe paymentRequestButton Element inserted here when available-->
         </div>
@@ -256,6 +255,7 @@ export default {
         alert(JSON.stringify(result))
         if (result) {
           document.querySelector(".stripe .card-only").style.display = "none";
+          document.querySelector("#default-payment-method").style.display = "none";
           document.querySelector(
             ".stripe .payment-request-available"
           ).style.display =
