@@ -238,6 +238,8 @@ export default {
           amount: this.amount * 100, // TODO: confirm that this calculation is accurate
           label: "Total"
         },
+        requestPayerName: true,
+        requestPayerEmail: true,
       });
 
       var paymentRequestElement = this.stripeConfig.elements.create("paymentRequestButton", {
