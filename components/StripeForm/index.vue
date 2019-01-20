@@ -153,6 +153,9 @@
           id="default-payment-method"
           type="submit"
           data-tid="stripe_elements.form.pay_button">Donate ${{ amount }}</button>
+        <p v-if="paymentMethod === 'paymentRequest'">
+          Donate ${{ amount }}
+        </p>
         <div
           id="stripe-paymentRequest">
           <!--Stripe paymentRequestButton Element inserted here when available-->
