@@ -209,7 +209,7 @@ export default {
     onSubmit: async function() {
       try {
         const token = await this.createToken(this.card, this.additionalData)
-        this.postStripeTransaction({
+        await this.postStripeTransaction({
           token,
           amount: this.amount,
           email: this.additionalData.email,
@@ -262,7 +262,6 @@ export default {
       const self = this
 
       paymentRequest.canMakePayment().then(function(result) {
-        alert(JSON.stringify(result))
         if (result) {
           document.querySelector(".stripe .card-only").style.display = "none";
           document.querySelector("#default-payment-method").style.display = "none";
@@ -273,20 +272,17 @@ export default {
           paymentRequestElement.mount("#stripe-paymentRequest");
           self.paymentMethod = 'paymentRequest'
         }
-        alert(self.paymentMethod)
       });
 
-      paymentRequest.on("token", function(result) {
-        this.token = result.token.id
-        this.postStripeTransaction({
-          token: this.token,
-          amount: this.amount,
-          email: this.additionalData.email,
-          metadata: this.metadata
+      paymentRequest.on("token", async function(result) {
+        self.token = result.token.id
+        await self.postStripeTransaction({
+          token: self.token,
+          amount: self.amount,
+          email: self.additionalData.email,
+          metadata: self.metadata
         })
         var example = document.querySelector(".stripe");
-        example.querySelector(".token").innerText = result.token.id;
-        example.classList.add("submitted");
         result.complete("success");
       });
     },
