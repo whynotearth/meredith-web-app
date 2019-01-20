@@ -240,6 +240,7 @@ export default {
         },
         requestPayerName: true,
         requestPayerEmail: true,
+        requestPayerPhone: true
       });
 
       var paymentRequestElement = this.stripeConfig.elements.create("paymentRequestButton", {
