@@ -263,6 +263,7 @@ export default {
           paymentRequestElement.mount("#stripe-paymentRequest");
           self.paymentMethod = 'paymentRequest'
         }
+        alert(self.paymentMethod)
       });
 
       paymentRequest.on("token", function(result) {
