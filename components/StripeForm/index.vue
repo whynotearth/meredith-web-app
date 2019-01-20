@@ -254,8 +254,8 @@ export default {
 
       paymentRequest.canMakePayment().then(function(result) {
         alert(JSON.stringify(result))
-        self.paymentMethod = 'paymentRequest'
         if (result) {
+          self.paymentMethod = 'paymentRequest'
           document.querySelector(".stripe .card-only").style.display = "none";
           document.querySelector(
             ".stripe .payment-request-available"
