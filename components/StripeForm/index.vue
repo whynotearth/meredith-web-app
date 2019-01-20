@@ -255,13 +255,13 @@ export default {
       paymentRequest.canMakePayment().then(function(result) {
         alert(JSON.stringify(result))
         if (result) {
-          self.paymentMethod = 'paymentRequest'
           document.querySelector(".stripe .card-only").style.display = "none";
           document.querySelector(
             ".stripe .payment-request-available"
           ).style.display =
             "block";
           paymentRequestElement.mount("#stripe-paymentRequest");
+          self.paymentMethod = 'paymentRequest'
         }
       });
 
