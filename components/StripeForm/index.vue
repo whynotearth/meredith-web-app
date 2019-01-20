@@ -144,9 +144,12 @@
           id="card-errors"
           role="alert" />
         <button
+          v-if="paymentMethod === 'default'"
           type="submit"
           data-tid="stripe_elements.form.pay_button">Donate ${{ amount }}</button>
-        <div id="stripe-paymentRequest">
+        <div
+          v-else-if="paymentMethod === 'paymentRequest'"
+          id="stripe-paymentRequest">
           <!--Stripe paymentRequestButton Element inserted here when available-->
         </div>
       </fieldset>
@@ -181,7 +184,8 @@ export default {
       phone_number: null
     },
     amount: config.DEFAULT_DONATION_AMOUNT,
-    componentStatus: null
+    componentStatus: null,
+    paymentMethod: 'default'
   }),
   mounted: function() {
     this.componentStatus = this.$machineStates.IDLE
@@ -246,6 +250,7 @@ export default {
 
       paymentRequest.canMakePayment().then(function(result) {
         alert(JSON.stringify(result))
+        this.paymentMethod = 'paymentRequest'
         if (result) {
           document.querySelector(".stripe .card-only").style.display = "none";
           document.querySelector(
