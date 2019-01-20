@@ -10,7 +10,7 @@
           data-tid="stripe_elements.form.pay_with_card">Pay with card</legend>
         <legend
           class="payment-request-available"
-          data-tid="elements_examples.form.enter_card_manually">Or enter card details</legend>
+          data-tid="elements_examples.form.enter_card_manually">Use your saved payment method.</legend>
 
         <div class="row">
           <div class="field">
