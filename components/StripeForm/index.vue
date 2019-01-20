@@ -12,7 +12,9 @@
           class="payment-request-available"
           data-tid="elements_examples.form.enter_card_manually">Use your saved payment method.</legend>
 
-        <div class="row">
+        <div
+          v-if="paymentMethod === 'default'"
+          class="row">
           <div class="field">
             <label
               for="stripe-name"
@@ -29,7 +31,9 @@
           </div>
         </div>
 
-        <div class="row">
+        <div
+          v-if="paymentMethod === 'default'"
+          class="row">
           <div class="field">
             <label
               for="stripe-email"
