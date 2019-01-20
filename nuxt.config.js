@@ -50,7 +50,8 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/pwa',
-    ['nuxt-fontawesome', {
+    ['@nuxtjs/google-tag-manager', { id: 'GTM-WWD9HXW' }],
+      ['nuxt-fontawesome', {
       component: 'fa',
       imports: [
         {
