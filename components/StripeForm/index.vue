@@ -130,7 +130,9 @@
           </div>
         </div>
 
-        <div class="row">
+        <div
+          v-if="paymentMethod === 'default'"
+          class="row">
           <div class="field">
             <label
               for="stripe-card"
