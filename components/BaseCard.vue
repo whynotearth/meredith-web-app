@@ -37,11 +37,6 @@ export default {
     justify-content: center;
     min-height: 100vh;
   }
-  .card__wrapper {
-    width: 320px;
-    height: 570px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  }
 }
 </style>
 
