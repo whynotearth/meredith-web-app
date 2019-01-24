@@ -26,7 +26,8 @@ async function postStripeTransaction({
 
 async function getBusiness(name) {
   try {
-    console.log(name)
+    const { stories, business } = await import(`@/cms/${name}`);
+    return { stories, business }
   } catch(e) {
     console.error(e)
   }
