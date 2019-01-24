@@ -24,6 +24,14 @@ async function postStripeTransaction({
   }
 }
 
+async function getBusiness(name) {
+  try {
+    console.log(name)
+  } catch(e) {
+    console.error(e)
+  }
+}
+
 export default {
   postStripeTransaction
 }
