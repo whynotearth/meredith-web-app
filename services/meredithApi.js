@@ -26,6 +26,7 @@ async function postStripeTransaction({
 
 async function getBusiness(name) {
   try {
+    // TODO: replace below with actual API call
     const { stories, business } = await import(`@/cms/${name}`);
     return { stories, business }
   } catch(e) {
