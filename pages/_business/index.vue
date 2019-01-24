@@ -7,10 +7,13 @@
 </template>
 <script>
 import Story from '@/components/Story';
+
 export default {
   components: { Story },
-  async asyncData({ app, params }) {
+  async asyncData({ store, params }) {
+    await store.dispatch('business/getBusiness', params.business)
     const { stories, business } = await import(`@/cms/${params.business}`);
+    console.log(store.state.business)
     return { story: { title: business.title, stories }, business };
   },
 }
