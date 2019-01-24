@@ -33,5 +33,6 @@ async function getBusiness(name) {
 }
 
 export default {
-  postStripeTransaction
+  postStripeTransaction,
+  getBusiness
 }
