@@ -96,8 +96,8 @@ export default {
     background-color: #6f6f6f;
   }
   .story__wrapper {
-    width: 320px;
-    height: 570px;
+    width: 436px;
+    height: 727px;
     border: 1px solid #666;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     border-radius: 15px;

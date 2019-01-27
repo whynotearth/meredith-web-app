@@ -115,13 +115,12 @@ export default {
 }
 
 .title {
-  background-color: rgba(#2F2F2F, 0.6);
   color: #fff;
   text-align: center;
   padding: 10px;
   font-size: 1.8em;
   line-height: 1em;
-  text-transform: uppercase;
+  font-weight:300;
   // margin: 7px;
   min-height: 5em;
   display: flex;

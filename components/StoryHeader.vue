@@ -68,12 +68,12 @@ header {
 
 h1 {
   font-size: 1em;
-  text-transform: uppercase;
+  font-weight:300;    
   overflow: hidden;
 }
 .logo {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   margin: 5px 15px;
 }
 
