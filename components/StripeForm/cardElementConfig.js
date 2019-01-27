@@ -5,21 +5,21 @@ const cardElementConfig = {
     base: {
       iconColor: "#fff",
       color: "#fff",
-      fontWeight: 400,
-      fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
-      fontSize: "1em",
+      fontWeight: 300,
+      fontFamily: "Montserrat, sans-serif",
+      fontSize: "16px",
       fontSmoothing: "antialiased",
 
       "::placeholder": {
-        color: "#BFAEF6"
+        color: "#fff"
       },
       ":-webkit-autofill": {
-        color: "#fce883"
+        color: "#fff"
       }
     },
     invalid: {
-      iconColor: "#FFC7EE",
-      color: "#FFC7EE"
+      iconColor: "#a33b20",
+      color: "#a33b20"
     }
   }
 }

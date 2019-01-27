@@ -26,7 +26,7 @@ export default {
     return {
       pageAttributes: {
         name: "Checkout",
-        title: "Stripe checkout form",
+        title: "Happy days!",
         style: {
           backgroundColor: "#17304A",
           color: "#FBFBFB"
