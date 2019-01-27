@@ -53,8 +53,9 @@ export default {
     }
   }
   .filler {
-    height: 5px;
-    margin: 5px;
+    height: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
     flex: 1;
   }
 }
