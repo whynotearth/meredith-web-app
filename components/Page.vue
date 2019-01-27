@@ -2,7 +2,7 @@
   <div
     class="container"
   >
-    <section class="story__wrapper">
+    <section class="page__wrapper">
       <story-header
         key="header"
         :title="title"
@@ -77,7 +77,7 @@ export default {
   position: relative;
 }
 
-.story__wrapper {
+.page__wrapper {
   position: relative;
   display: block;
   height: 100vh;
@@ -85,7 +85,6 @@ export default {
   background-color: #333;
   perspective: 640px;
   perspective-origin: 0 50%;
-  border-radius: 15px;
   .loading-container{
     display: flex;
     justify-content: center;
@@ -101,11 +100,12 @@ export default {
     min-height: 100vh;
     background-color: #6f6f6f;
   }
-  .story__wrapper {
+  .page__wrapper {
     width: 320px;
     height: 570px;
     border: 1px solid #666;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 15px;
   }
 }
 

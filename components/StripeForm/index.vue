@@ -8,8 +8,13 @@
         <legend
           class="card-only"
           data-tid="stripe_elements.form.pay_with_card">Pay with card</legend>
+        <legend
+          class="payment-request-available"
+          data-tid="elements_examples.form.enter_card_manually">Use your saved payment method.</legend>
 
-        <div class="row">
+        <div
+          v-if="paymentMethod === 'default'"
+          class="row">
           <div class="field">
             <label
               for="stripe-name"
@@ -26,7 +31,9 @@
           </div>
         </div>
 
-        <div class="row">
+        <div
+          v-if="paymentMethod === 'default'"
+          class="row">
           <div class="field">
             <label
               for="stripe-email"
@@ -127,7 +134,9 @@
           </div>
         </div>
 
-        <div class="row">
+        <div
+          v-if="paymentMethod === 'default'"
+          class="row">
           <div class="field">
             <label
               for="stripe-card"
@@ -141,9 +150,14 @@
           id="card-errors"
           role="alert" />
         <button
+          id="default-payment-method"
           type="submit"
           data-tid="stripe_elements.form.pay_button">Donate ${{ amount }}</button>
-        <div id="stripe-paymentRequest">
+        <p v-if="paymentMethod === 'paymentRequest'">
+          Donate ${{ amount }}
+        </p>
+        <div
+          id="stripe-paymentRequest">
           <!--Stripe paymentRequestButton Element inserted here when available-->
         </div>
       </fieldset>
@@ -178,7 +192,8 @@ export default {
       phone_number: null
     },
     amount: config.DEFAULT_DONATION_AMOUNT,
-    componentStatus: null
+    componentStatus: null,
+    paymentMethod: 'default'
   }),
   mounted: function() {
     this.componentStatus = this.$machineStates.IDLE
@@ -194,7 +209,7 @@ export default {
     onSubmit: async function() {
       try {
         const token = await this.createToken(this.card, this.additionalData)
-        this.postStripeTransaction({
+        await this.postStripeTransaction({
           token,
           amount: this.amount,
           email: this.additionalData.email,
@@ -230,20 +245,9 @@ export default {
           amount: this.amount * 100, // TODO: confirm that this calculation is accurate
           label: "Total"
         },
-      });
-
-      paymentRequest.on("token", function(result) {
-        this.token = result.token.id
-        this.postStripeTransaction({
-          token: this.token,
-          amount: this.amount,
-          email: this.additionalData.email,
-          metadata: this.metadata
-        })
-        var example = document.querySelector(".stripe");
-        example.querySelector(".token").innerText = result.token.id;
-        example.classList.add("submitted");
-        result.complete("success");
+        requestPayerName: true,
+        requestPayerEmail: true,
+        requestPayerPhone: true
       });
 
       var paymentRequestElement = this.stripeConfig.elements.create("paymentRequestButton", {
@@ -255,15 +259,31 @@ export default {
         }
       });
 
+      const self = this
+
       paymentRequest.canMakePayment().then(function(result) {
         if (result) {
           document.querySelector(".stripe .card-only").style.display = "none";
+          document.querySelector("#default-payment-method").style.display = "none";
           document.querySelector(
             ".stripe .payment-request-available"
           ).style.display =
             "block";
           paymentRequestElement.mount("#stripe-paymentRequest");
+          self.paymentMethod = 'paymentRequest'
         }
+      });
+
+      paymentRequest.on("token", async function(result) {
+        self.token = result.token.id
+        await self.postStripeTransaction({
+          token: self.token,
+          amount: self.amount,
+          email: self.additionalData.email,
+          metadata: self.metadata
+        })
+        var example = document.querySelector(".stripe");
+        result.complete("success");
       });
     },
     createToken: async function (card, additionalData) {
