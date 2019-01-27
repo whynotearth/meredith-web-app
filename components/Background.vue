@@ -37,7 +37,7 @@ export default {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    filter: blur(15px);
+    filter: blur(50px);
     opacity: 0.2;
   }
 }
