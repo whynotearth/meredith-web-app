@@ -5,7 +5,7 @@ const cardElementConfig = {
     base: {
       iconColor: "#fff",
       color: "#fff",
-      fontWeight: 300,
+      font-weight: 300,
       fontFamily: "Montserrat, sans-serif",
       fontSize: "16px",
       fontSmoothing: "antialiased",

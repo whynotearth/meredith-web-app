@@ -309,9 +309,9 @@ $secondary-color: #fbfbfb;
 }
 
 .stripe-wrapper.stripe * {
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 0.98em; // TODO: find out why this has to be so weird
-  font-weight: 400;
+  font-family: 'Montserrat', sans-serif;
+  //font-size: 0.98em; // TODO: find out why this has to be so weird... chris switched fonts to monsterrat 27 jan 2019
+  font-weight: 300;
 }
 
 #stripe-paymentRequest {
