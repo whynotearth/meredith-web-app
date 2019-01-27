@@ -42,8 +42,9 @@ export default {
   padding: 5px 10px;
   &__item {
     border-radius: 5px;
-    height: 5px;
-    margin: 5px;
+    height: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
     flex: 1;
     background-color: #464646;
     transition: background-color 0.2s;
