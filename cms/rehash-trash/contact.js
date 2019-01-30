@@ -5,9 +5,10 @@ export default {
   h2: 'Contact Us',
   image: 'images/rehash-trash/contact.jpeg',
   ctaText: 'Learn More',
-  ctaLink: 'checkout',
+  ctaLink: 'chat', // contact
   stories: [
     {
+      title: 'Chat with us',
       image: 'images/rehash-trash/contact.jpeg',
       blur: '2px',
     },

@@ -36,9 +36,10 @@ import StoryHeader from '@/components/StoryHeader';
 import Loading from "@/components/Loading";
 import Checkmark from "@/components/Checkmark";
 import StripeForm from "@/components/StripeForm/index";
+import Chat from '@/components/Chat/index'
 
 export default {
-  components: { BaseCard, Checkmark, Loading, StoryHeader, StripeForm },
+  components: { BaseCard, Checkmark, Loading, StoryHeader, StripeForm, Chat },
   props: {
     'componentStatus': {
       type: String,
