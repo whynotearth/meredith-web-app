@@ -332,7 +332,7 @@ $secondary-color: #fbfbfb;
   padding: 0 10px;
   text-align: center;
   font-size: 14px;
-  font-weight: 500;
+  // font-weight: 500; // commented out 31 Jan 2019
   color: $secondary-color;
   background-color: $primary-color;
 }

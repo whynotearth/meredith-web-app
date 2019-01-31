@@ -76,6 +76,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   position: relative;
+  font-weight: 300;
 }
 
 .page__wrapper {
