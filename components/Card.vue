@@ -92,7 +92,7 @@ export default {
 }
 
 .cta {
-  height: 150px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
