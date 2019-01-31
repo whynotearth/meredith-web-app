@@ -75,7 +75,7 @@ export default {
   left: 0; right: 0;
   background-position: center;
   background-size: cover;
-  animation: zoomin 120s linear;
+  animation: zoomin 30s linear;
   animation-fill-mode: forwards;
   z-index: -1;
 }
@@ -92,7 +92,7 @@ export default {
 }
 
 .cta {
-  height: 150px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
