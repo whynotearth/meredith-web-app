@@ -18,8 +18,8 @@ export default {
   },
   computed: {
     ...mapState({
-      business: state => state.business.business,
-      story: state => ({ title: state.business.business.title, stories: state.business.stories }),
+      business: state => state.business.businessData,
+      story: state => ({ title: state.business.businessData.title, stories: state.business.stories }),
       storeStatus: state => state.business.storeStatus
     })
   }

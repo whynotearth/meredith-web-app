@@ -8,7 +8,7 @@ const statusOptions = {
 
 export const state = () => ({
   storeStatus: statusOptions.LOADING,
-  business: null,
+  businessData: null,
   stories: null,
   error: null
 })
