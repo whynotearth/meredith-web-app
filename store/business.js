@@ -37,7 +37,7 @@ export const mutations = {
     }
   },
   setBusinessAndStories(state, { business, stories }, error) {
-    state.business = business
+    state.businessData = business
     state.stories = stories
     if(error) {
       state.error = error
