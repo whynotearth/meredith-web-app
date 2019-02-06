@@ -8,7 +8,7 @@ const statusOptions = {
 
 export const state = () => ({
   storeStatus: statusOptions.LOADING,
-  business: null,
+  businessData: null,
   stories: null,
   error: null
 })
@@ -37,7 +37,7 @@ export const mutations = {
     }
   },
   setBusinessAndStories(state, { business, stories }, error) {
-    state.business = business
+    state.businessData = business
     state.stories = stories
     if(error) {
       state.error = error
