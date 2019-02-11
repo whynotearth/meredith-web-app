@@ -21,7 +21,9 @@ export default {
 
     const story = await meredithApi.getStory({ storyName, businessName })
 
-    return { story: story.default ? story.default : story, business };
+    return {
+    story: story.default || story,
+    business };
   },
 }
 </script>
