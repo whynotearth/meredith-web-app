@@ -13,6 +13,13 @@ import { meredithApi } from '@/services'
 
 export default {
   components: { Story },
+  async fetch({ store, params }) {
+    const storyName = params.story
+    const businessName = params.business
+
+    await store.dispatch('business/getBusiness', businessName)
+    await store.dispatch('business/getBusiness', businessName)
+  },
   async asyncData({ app, params }) {
     const storyName = params.story
     const businessName = params.business
