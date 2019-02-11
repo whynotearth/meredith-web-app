@@ -10,7 +10,8 @@ export const state = () => ({
   storeStatus: statusOptions.LOADING,
   businessData: null,
   stories: null,
-  error: null
+  error: null,
+  currentStory: null
 })
 
 export const actions = {
@@ -21,6 +22,18 @@ export const actions = {
       if (!res) throw 'Empty response'
       const { business, stories } = res
       commit('setBusinessAndStories', { business, stories })
+      commit('updateStoreStatus', statusOptions.SUCCESSS)
+    } catch (e) {
+      console.error(e)
+      commit('updateStoreStatus', statusOptions.ERROR, e)
+    }
+  },
+  async getStory({ commit }, { storyName, businessName }) {
+    try {
+      commit('updateStoreStatus', statusOptions.LOADING)
+      const res =  await meredithApi.getStory({ storyName, businessName })
+      if (!res) throw 'Empty response'
+      commit('setCurrentStory', res)
       commit('updateStoreStatus', statusOptions.SUCCESSS)
     } catch (e) {
       console.error(e)
@@ -39,6 +52,12 @@ export const mutations = {
   setBusinessAndStories(state, { business, stories }, error) {
     state.businessData = business
     state.stories = stories
+    if(error) {
+      state.error = error
+    }
+  },
+  setCurrentStory(state, currentStory, error) {
+    state.currentStory = currentStory
     if(error) {
       state.error = error
     }
