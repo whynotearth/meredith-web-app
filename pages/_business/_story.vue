@@ -1,6 +1,7 @@
 <template>
   <div>
     <story
+      v-if="businessData && story"
       :brand="businessData.name"
       :logo="businessData.logo"
       :home="businessData.id"
@@ -14,11 +15,12 @@ import { meredithApi } from '@/services'
 export default {
   components: { Story },
   async fetch({ store, params }) {
+    console.log('fetching')
     const storyName = params.story
     const businessName = params.business
 
     await store.dispatch('business/getBusiness', businessName)
-    await store.dispatch('business/getBusiness', businessName)
+    await store.dispatch('business/getStory', { storyName, businessName })
   },
   async asyncData({ app, params }) {
     const storyName = params.story
