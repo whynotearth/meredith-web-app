@@ -34,7 +34,18 @@ async function getBusiness(name) {
   }
 }
 
+async function getStory({ storyName, businessName }) {
+  try {
+    // TODO: replace below with actual API call
+    const story = await import(`@/cms/${businessName}/${storyName}.js`);
+    return story
+  } catch(e) {
+    console.error(e)
+  }
+}
+
 export default {
   postStripeTransaction,
-  getBusiness
+  getBusiness,
+  getStory
 }

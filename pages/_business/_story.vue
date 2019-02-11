@@ -9,11 +9,15 @@
 </template>
 <script>
 import Story from '@/components/Story';
+import { meredithApi } from '@/services'
+
 export default {
   components: { Story },
   async asyncData({ app, params }) {
     const { business } = await import(`@/cms/${params.business}`);
-    const story = await import(`@/cms/${params.business}/${params.story}.js`);
+    const storyName = params.story
+    const businessName = params.business
+    const story = await meredithApi.getStory({ storyName, businessName })
 
     return { story: story.default ? story.default : story, business };
   },
