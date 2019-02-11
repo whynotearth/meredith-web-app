@@ -1,9 +1,9 @@
 <template>
   <div>
     <story
-      :brand="business.name"
-      :logo="business.logo"
-      :home="business.id"
+      :brand="businessData.name"
+      :logo="businessData.logo"
+      :home="businessData.id"
       :story="story"/>
   </div>
 </template>
@@ -17,13 +17,14 @@ export default {
     const storyName = params.story
     const businessName = params.business
 
-    const business = await meredithApi.getBusiness(businessName)
+    const businessRes = await meredithApi.getBusiness(businessName)
+    const businessData = businessRes.business
 
     const story = await meredithApi.getStory({ storyName, businessName })
 
     return {
     story: story.default || story,
-    business };
+    businessData };
   },
 }
 </script>
