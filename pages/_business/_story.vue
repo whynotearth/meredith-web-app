@@ -11,29 +11,22 @@
 <script>
 import Story from '@/components/Story';
 import { meredithApi } from '@/services'
+import { mapState } from 'vuex'
 
 export default {
   components: { Story },
   async fetch({ store, params }) {
-    console.log('fetching')
     const storyName = params.story
     const businessName = params.business
 
     await store.dispatch('business/getBusiness', businessName)
     await store.dispatch('business/getStory', { storyName, businessName })
   },
-  async asyncData({ app, params }) {
-    const storyName = params.story
-    const businessName = params.business
-
-    const businessRes = await meredithApi.getBusiness(businessName)
-    const businessData = businessRes.business
-
-    const story = await meredithApi.getStory({ storyName, businessName })
-
-    return {
-    story: story.default || story,
-    businessData };
-  },
+  computed: {
+    ...mapState({
+      businessData: state => state.business.businessData,
+      story: state => state.business.currentStory
+    })
+  }
 }
 </script>
