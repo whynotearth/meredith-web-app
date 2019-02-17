@@ -1,19 +1,37 @@
 <template>
-  <div class="container">
+  <transition
+    enter-class="slider closed"
+    enter-active-class="slider transition"
+    enter-to-class="slider"
+    leave-class="slider"
+    leave-active-class="slider transition"
+    leave-to-class="slider closed"
+  >
     <div
-      class="card__wrapper"
+      v-if="show"
+      class="BaseCard container "
     >
-      <main>
-        <slot />
-      </main>
+      <div class="card__wrapper">
+        <main>
+          <slot/>
+        </main>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
-
 export default {
-  name: "BaseCard"
+  name: "BaseCard",
+  data: () => ({
+    show: false
+  }),
+  mounted () {
+    this.show = true
+  },
+  beforeDestroy () {
+    this.show = false
+  }
 };
 </script>
 
@@ -27,9 +45,29 @@ export default {
   header {
     text-align: center;
     font-size: 1.5em;
-    padding: 10px
+    padding: 10px;
   }
 }
+
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
+}
+
+.slider.transition {
+  transition: all 0.5s;
+}
+
+.slider.closed {
+  top: 100%;
+  height: 0;
+}
+
 @media (min-width: 550px) {
   .container {
     display: flex;
