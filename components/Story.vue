@@ -20,7 +20,19 @@
         :key="`story_${i}`"
         :story="item"
       />
-
+      <section
+        v-if="story.stories[storyId].ctaLink"
+        :class="['checkout', {'show-checkout': showCheckout}]">
+        <div
+          class="cta"
+          @click="showCheckout = !showCheckout">
+          <fa :icon="['fas', 'chevron-up']" />
+          {{ story.stories[storyId].ctaText }}
+        </div>
+        <div class="checkout__body">
+          <stripe-form />
+        </div>
+      </section>
       <bookend
         key="bookend"
         story/>
@@ -55,6 +67,7 @@ export default {
   },
   data: () => ({
     storyId: 0,
+    showCheckout: false,
   }),
   computed: {
     backgroundImage() {
@@ -77,15 +90,12 @@ export default {
   position: relative;
 }
 
-
 .story__wrapper {
   position: relative;
   display: block;
   height: 100vh;
-  overflow: hidden;
-  background-color: #333;
+  background-color: rgb(206, 193, 193);
   perspective: 640px;
-  perspective-origin: 0 50%;
 }
 @media (min-width: 550px){
   .container {
@@ -96,11 +106,10 @@ export default {
     background-color: #6f6f6f;
   }
   .story__wrapper {
-    width: 436px;
-    height: 727px;
+    width: 380px;
+    height: 90vh;
     border: 1px solid #666;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    border-radius: 15px;
   }
 }
 
@@ -111,5 +120,81 @@ export default {
   opacity: 0;
 }
 
+
+.checkout {
+  position: absolute;
+  height: 100vh;
+  transform: translateY(calc(100vh));
+  z-index: 100;
+  top: 30px;
+
+  transition: transform 0.3s;
+
+  // animation: slideup 0.3s;
+  // animation-fill-mode: forwards;
+
+  &.show-checkout {
+    transform: translateY(0);
+  }
+}
+
+.checkout__body {
+  background-color: #193149;
+  height: 100%;
+  padding: 20px;
+}
+
+@keyframes slideup {
+  0% {
+    transform: translateY(100vh);
+  }
+  100% {
+    transform: translateY(calc(100vh - 130px));
+  }
+}
+
+.cta {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px;
+  text-align: center;
+  background-color: #333;
+  font-weight: 400;
+  color: #fff;
+  width: 100%;
+  text-decoration: none;
+  z-index: 50;
+  background: transparent;
+  background-size: 100% auto;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  width: 320px;
+  margin: 0 auto -1px;
+  cursor: pointer;
+  background-image: url('/images/meredith-swipe-up.png');
+  svg {
+    display: block;
+    margin: 10px auto;
+  }
+}
+
+@media (min-width: 550px){
+  .checkout {
+    height: 90vh;
+    transform: translateY(calc(90vh - 150px));
+  }
+
+  @keyframes slideup {
+  0% {
+    transform: translateY(90vh);
+  }
+  100% {
+    transform: translateY(calc(90vh - 150px));
+  }
+}
+
+}
 
 </style>

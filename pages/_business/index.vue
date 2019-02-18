@@ -10,7 +10,9 @@
 import Story from '@/components/Story';
 
 import { mapState } from 'vuex'
+
 // TODO: display loading when storeStatus is loading
+
 export default {
   components: { Story },
   async fetch({ store, params }) {

@@ -8,35 +8,31 @@
         filter: `blur(${story.blur})`,
       }"
       class="story__background-image"/>
-    <h2
-      v-if="story.title"
-      key="title"
-      class="title">
-      {{ story.h2 }}
-    </h2>
-    <div
-      v-if="story.content"
-      key="content"
-      :style="{
-        backgroundColor: story.contentBackgroundColor,
-        color: story.contentColor,
-      }"
-      class="content">
-      {{ story.content }}
-    </div>
-    <nuxt-link
-      v-if="story.ctaLink"
-      key="cta"
-      :to="story.ctaLink"
-      append
-      class="cta">
-      <fa :icon="['fas', 'chevron-up']" />
-      {{ story.ctaText }}
-    </nuxt-link>
+    <section class="text-content">
+      <h2
+        v-if="story.title"
+        key="title"
+        class="title">
+        {{ story.h2 }}
+      </h2>
+      <div
+        v-if="story.content"
+        key="content"
+        :style="{
+          backgroundColor: story.contentBackgroundColor,
+          color: story.contentColor,
+        }"
+        class="content">
+        {{ story.content }}
+      </div>
+    </section>
   </div>
 </template>
 <script>
+import StripeForm from "@/components/StripeForm/index";
+
 export default {
+  components: { StripeForm },
   props: {
     'story': {
       type: Object,
@@ -80,7 +76,28 @@ export default {
   z-index: -1;
 }
 
+.checkout {
+  position: absolute;
+  height: 100vh;
+  transform: translateY(calc(100vh));
+  z-index: 100;
+  top: 30px;
 
+  transition: transform 0.3s;
+
+  // animation: slideup 0.3s;
+  // animation-fill-mode: forwards;
+
+  &.show-checkout {
+    transform: translateY(0);
+  }
+}
+
+.checkout__body {
+  background-color: #193149;
+  height: 100%;
+  padding: 20px;
+}
 
 @keyframes zoomin {
   0% {
@@ -90,24 +107,36 @@ export default {
     transform: scale(1.5);
   }
 }
+@keyframes slideup {
+  0% {
+    transform: translateY(100vh);
+  }
+  100% {
+    transform: translateY(calc(100vh - 130px));
+  }
+}
 
 .cta {
-  height: 100px;
+  height: 120px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  padding: 10px;
   text-align: center;
   background-color: #333;
-  background: linear-gradient(rgba(0, 0, 0, 0) 0, #2F2F2F 100%);
   font-weight: 400;
   color: #fff;
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   text-decoration: none;
-  z-index: 20;
-
+  z-index: 50;
+  background: transparent;
+  background-size: 100% auto;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  width: 320px;
+  margin: 0 auto -1px;
+  cursor: pointer;
+  background-image: url('/images/meredith-swipe-up.png');
   svg {
     display: block;
     margin: 10px auto;
@@ -149,6 +178,25 @@ img {
   width: 100%;
 }
 
+.text-content {
+  transition: all 0.3s 1s;
+  height: 100%;
+  margin: 0 15%;
+  color: #fff;
+  background-color: rgba(#666, 0.8);
+  opacity: 0;
+  z-index: 50;
+  position: relative;
+}
+
+.story__wrapper:hover {
+  .card.active {
+    .text-content {
+      // opacity: 1;
+    }
+  }
+}
+
 .story-card {
   .cta {
     background: linear-gradient(360deg, #6081F2 0%, rgba(0, 0, 0, 0) 100%);
@@ -161,6 +209,19 @@ img {
     height: 100%;
     width: 100%;
   }
+  .checkout {
+    height: 90vh;
+    transform: translateY(calc(90vh - 150px));
+  }
+
+  @keyframes slideup {
+  0% {
+    transform: translateY(90vh);
+  }
+  100% {
+    transform: translateY(calc(90vh - 150px));
+  }
+}
 
 }
 </style>

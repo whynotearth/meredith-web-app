@@ -3,17 +3,6 @@
     <slider
       :length="length"
       :story-id="storyId"/>
-    <section class="content__wrapper">
-      <nuxt-link :to="`/${home}`">
-        <img
-          :src="`/${logo}`"
-          :alt="title"
-          class="logo">
-      </nuxt-link>
-      <h1 v-if="title">
-        {{ title }}
-      </h1>
-    </section>
   </header>
 </template>
 <script>
@@ -32,18 +21,6 @@ export default {
       type: Number,
       default: 0,
     },
-    'home': {
-      type: String,
-      default: '',
-    },
-    'title': {
-      type: String,
-      default: '',
-    },
-    'logo': {
-      type: String,
-      default: '',
-    },
   },
 }
 </script>
@@ -53,28 +30,12 @@ export default {
 header {
   left: 0;
   right: 0;
-  // font-size: 0.8em;
   z-index: 10;
   position: absolute;
-  height: 100px;
+  height: 40px;
   color: #fff;
   background: linear-gradient(#2F2F2F 0%, rgba(0, 0, 0, 0) 100%);
 }
 
-.content__wrapper {
-  display: flex;
-  align-items: center;
-}
-
-h1 {
-  font-size: 1em;
-  font-weight:300;    
-  overflow: hidden;
-}
-.logo {
-  width: 30px;
-  height: 30px;
-  margin: 5px 15px;
-}
 
 </style>
