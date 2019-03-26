@@ -5,7 +5,7 @@
       key="image"
       :style="{
         backgroundImage: `url(/${story.image})`,
-        filter: `blur(${story.blur})`,
+        filter: `blur(${story.blur})`,    
       }"
       class="story__background-image"/>
     <h2

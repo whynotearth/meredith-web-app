@@ -82,3 +82,6 @@ dist
 
 # Service worker for pwa
 sw.*
+
+# Development files
+dev.html
