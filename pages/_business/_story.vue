@@ -10,7 +10,7 @@
 </template>
 <script>
 import Story from '@/components/Story';
-import { meredithApi } from '@/services'
+import { meredithApi } from '@/services' 
 import { mapState } from 'vuex'
 
 export default {

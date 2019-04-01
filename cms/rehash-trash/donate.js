@@ -1,4 +1,5 @@
 export default {
+  brand: 'rehash-trash',
   name: 'donate',
   title: 'Donate',
   slug: 'donate',

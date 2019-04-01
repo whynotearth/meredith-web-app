@@ -1,7 +1,9 @@
 <template>
   <section class="container">
     <h1>Why Not Earth?</h1>
-    <h2>Meredith</h2>
+     <nuxt-link to="meredith">
+       Meredith
+     </nuxt-link>
     <nuxt-link to="rehash-trash">
       Rehash Trash
     </nuxt-link>

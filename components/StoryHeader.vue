@@ -4,12 +4,14 @@
       :length="length"
       :story-id="storyId"/>
     <section class="content__wrapper">
-      <nuxt-link :to="`/${home}`">
+      <div v-if="logo">
+        <nuxt-link :to="`/${home}`">
         <img
           :src="`/${logo}`"
           :alt="title"
           class="logo">
       </nuxt-link>
+      </div>
       <h1 v-if="title">
         {{ title }}
       </h1>

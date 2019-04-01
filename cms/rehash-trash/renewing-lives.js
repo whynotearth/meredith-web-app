@@ -1,4 +1,5 @@
 export default {
+  brand: 'rehash-trash',
   name: 'renewing-lives',
   title: 'Renewing Lives',
   h2: 'Renewing Lives: Female Empowerment',

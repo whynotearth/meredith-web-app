@@ -1,4 +1,5 @@
 export default {
+  brand: 'rehash-trash',
   name: 'contact',
   title: 'Contact',
   slug: 'contact',

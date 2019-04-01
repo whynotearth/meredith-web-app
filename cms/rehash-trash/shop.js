@@ -1,4 +1,5 @@
 export default {
+  brand: 'rehash-trash',
   name: 'shop',
   title: 'Shop',
   slug: 'shop',
@@ -6,6 +7,7 @@ export default {
   image: 'images/rehash-trash/shop-1.jpeg',
   ctaText: 'Shop Now',
   ctaLink: 'shop',
+  contentBackgroundColor: 'rgba(0,0,0,0.2)',
   stories: [
     {
       image: 'images/rehash-trash/shop-1.jpeg',

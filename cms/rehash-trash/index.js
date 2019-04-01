@@ -17,7 +17,10 @@ export const stories = [
   {
     name: 'home',
     image: 'images/rehash-trash/1.jpeg',
+    title: 'Rehash Trash',
+    h2: 'Rehash Trash',
     blur: '5px',
+    contentBackgroundColor: 'rgba(0,0,0,0.2)',
   },
   OurStory,
   RecyclingRubbish,

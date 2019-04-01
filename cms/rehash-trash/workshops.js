@@ -1,4 +1,5 @@
 export default {
+  brand: 'rehash-trash',
   name: 'workshops',
   title: 'Workshops',
   h2: 'Workshops',

@@ -1,6 +1,5 @@
 const pkg = require('./package');
 const axios = require('axios');
-
 import data from './cms';
 
 module.exports = {
@@ -29,6 +28,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
+
   loading: { color: '#f4f4f4' },
 
   /*
@@ -42,7 +42,11 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/machineStates.js'
+    '~/plugins/machineStates.js',
+    {
+      src: '~plugins/touch',
+      ssr: false
+    }
   ],
 
   /*
@@ -100,7 +104,10 @@ module.exports = {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
+          options : {
+            fix : true
+          }
         })
       }
     }

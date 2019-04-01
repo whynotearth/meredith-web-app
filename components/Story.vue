@@ -11,6 +11,7 @@
         :title="story.title"
         :length="story.stories.length"
         :story-id="storyId"
+        :heading="story.heading"
         :logo="logo"
         :home="home"/>
 
