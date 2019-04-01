@@ -1,4 +1,5 @@
 export default {
+  brand: 'rehash-trash',
   name: 'recycling-rubbish',
   title: 'Recycling Rubbish',
   h2: 'Recycling Rubbish: Environment + Community',
